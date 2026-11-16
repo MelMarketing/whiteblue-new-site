@@ -185,6 +185,38 @@
   .panel__cta { min-width: 0; }
 }
 
+/* Desktop deck: keep every product tab fully visible instead of layering its copy under adjacent cards. */
+@media (min-width: 1281px) {
+  .deck {
+    gap: 16px;
+    height: clamp(400px, 26.5vw, 508px);
+  }
+  .deck__card,
+  .deck__card:first-child,
+  .deck__card--active:not(:first-child),
+  .deck__card--after-active {
+    flex: 1 1 0;
+    min-width: 0;
+    margin-left: 0;
+  }
+  .deck__card--active { flex: 3 1 0; }
+  .tab { padding: 34px 16px; }
+  .tab__logo { width: clamp(72px, 5.2vw, 96px); }
+  .tab__name {
+    margin-top: 14px;
+    font-size: clamp(1.125rem, 1.2vw, 1.4rem);
+  }
+  .tab__tagline {
+    max-width: none;
+    font-size: clamp(0.875rem, 0.9vw, 1rem);
+    line-height: 1.45;
+  }
+  .tab__expand {
+    font-size: clamp(0.875rem, 0.95vw, 1.125rem);
+    white-space: nowrap;
+  }
+}
+
 /* ---------- Motion ---------- */
 /* Newly expanded content fades up once the card has opened */
 .panel { animation: panel-in 0.7s var(--wb-ease-out) both; }
