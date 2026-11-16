@@ -200,3 +200,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (prefers-reduced-motion: reduce) {
   .wb-reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
 }
+
+/* Desktop rhythm: reduce oversized gaps between homepage sections. */
+@media (min-width: 1281px) {
+  :root { --wb-section-y: clamp(56px, 4.5vw, 88px); }
+}
