@@ -117,6 +117,7 @@
   &:hover svg { transform: translateX(3px); }
 }
 .newsletter__error { position: absolute; left: 22px; top: calc(100% + 4px); margin: 0; font-size: 0.875rem; color: var(--wb-red); }
+.newsletter__unavailable { position: absolute; left: 22px; top: calc(100% + 4px); margin: 0; font-size: 0.875rem; color: var(--wb-blue-deep); }
 .newsletter__done { font-family: var(--wb-font-display); font-weight: 700; font-size: 1.125rem; color: var(--wb-blue-deep); }
 
 /* ---------- Offices + sitemap ---------- */
