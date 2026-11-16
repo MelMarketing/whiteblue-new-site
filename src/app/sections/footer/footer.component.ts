@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { RevealDirective } from '../../shared/reveal.directive';
 import { FOOTER_COLUMNS, LEGAL_LINKS, OFFICE_PINS, SOCIAL_LINKS } from '../../content/site-content';
 
-type SubscribeState = 'idle' | 'invalid' | 'done';
+type SubscribeState = 'idle' | 'invalid' | 'unavailable';
 
 /** Figma "footer" (805:61173): newsletter, offices globe, sitemap, socials and the cricket "SIX!" flourish. */
 @Component({
@@ -30,8 +30,7 @@ export class FooterComponent {
       this.state.set('invalid');
       return;
     }
-    // TODO: send this.email to the newsletter provider (Mailchimp, HubSpot, etc.).
-    this.state.set('done');
-    this.email = '';
+    // The preview has no newsletter provider connected. Do not report a successful subscription.
+    this.state.set('unavailable');
   }
 }
