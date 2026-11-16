@@ -258,6 +258,24 @@
   .footer__heading { white-space: normal; }
 }
 
+/* Desktop footer: reserve distinct columns for offices, sitemap and social links. */
+@media (min-width: 1281px) {
+  .footer__heading {
+    font-size: clamp(1.5rem, 1.8vw, 2.125rem);
+    white-space: normal;
+  }
+  .footer__main {
+    grid-template-columns: minmax(240px, 320px) minmax(0, 1fr) 72px;
+    column-gap: clamp(32px, 3vw, 56px);
+  }
+  .offices, .sitemap, .social { min-width: 0; }
+  .sitemap__columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(20px, 2vw, 36px);
+  }
+  .sitemap__columns a { white-space: normal; }
+}
+
 /* ---------- Motion ---------- */
 .footer__grid-lines { animation: wb-grid-drift 30s linear infinite; }
 .footer__ball-mark { animation: wb-float 7s ease-in-out infinite; }
