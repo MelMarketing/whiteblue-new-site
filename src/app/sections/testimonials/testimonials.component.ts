@@ -128,6 +128,16 @@ import { TESTIMONIALS } from '../../content/site-content';
     .quote-card__avatar { animation: avatar-pop 0.6s var(--wb-ease-spring) 0.35s both; }
     @keyframes avatar-pop { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
 
+    @media (min-width: 1281px) {
+      .quote-card {
+        background: linear-gradient(110deg, #1b3fb5 0%, #2c58f1 100%);
+      }
+      .quote-card__text p {
+        font-size: clamp(1.5rem, 1.85vw, 2.25rem);
+        line-height: 1.3;
+      }
+    }
+
     @media (max-width: 720px) {
       .stage wb-carousel-arrows { inset-inline: -8px; top: auto; bottom: -84px; transform: none; justify-content: center; gap: 16px; }
       .dots { margin-top: 100px; }
