@@ -27,10 +27,10 @@ export const CLIENT_LOGOS: ClientLogo[] = [
 
 export interface Stat { value: string; accent: string; label: string; }
 export const STATS: Stat[] = [
-  { value: '2500', accent: '+', label: 'Global talent pool / qualified tech experts' }
-  { value: '90', accent: '%', label: 'Certified / enriched employees' }
-  { value: '20', accent: '+', label: 'Global clients trusting our services' }
-  { value: '100', accent: '%', label: 'Compliance / ISO 27001 certified' }
+  { value: '2500', accent: '+', label: 'Global talent pool / qualified tech experts' },
+  { value: '90', accent: '%', label: 'Certified / enriched employees' },
+  { value: '20', accent: '+', label: 'Global clients trusting our services' },
+  { value: '100', accent: '%', label: 'Compliance / ISO 27001 certified' },
 ];
 
 export interface Industry {
@@ -48,7 +48,7 @@ export const INDUSTRIES: Industry[] = [
     description: 'Modernize core banking and policy systems, connect credit union cores through APIs, and bring explainable AI into regulated workflows.',
     image: 'assets/img/industry-financial.png',
     tone: 'blue',
-    href: '#services',
+    href: 'https://www.whiteblue.com/tech-blog/categories/case-study',
   },
   {
     number: '02',
@@ -56,7 +56,7 @@ export const INDUSTRIES: Industry[] = [
     description: 'Predict arrivals and delays, optimize capacity across your network, and automate booking, documentation and invoicing.',
     image: 'assets/img/industry-supply-chain.png',
     tone: 'yellow',
-    href: '#services',
+    href: 'https://www.whiteblue.com/tech-blog/categories/case-study',
   },
   {
     number: '03',
@@ -64,7 +64,7 @@ export const INDUSTRIES: Industry[] = [
     description: 'Speed up engineering with AI coding accelerators, Infrastructure-as-Code and API-first platforms.',
     image: 'assets/img/industry-hitech.png',
     tone: 'yellow',
-    href: '#services',
+    href: 'https://www.whiteblue.com/tech-blog/categories/case-study',
   },
   {
     number: '04',
@@ -72,7 +72,7 @@ export const INDUSTRIES: Industry[] = [
     description: 'Unify plant and IoT data, connect legacy systems through APIs, and give field teams apps that keep working offline.',
     image: 'assets/img/industry-manufacturing.png',
     tone: 'blue',
-    href: '#services',
+    href: 'https://www.whiteblue.com/tech-blog/categories/case-study',
   },
 ];
 
@@ -144,7 +144,7 @@ export const PRODUCTS: Product[] = [
     tagline: 'Automate tasks with AI.',
     summary: 'Automate tasks with AI.',
     ctaLabel: 'Learn about Dobby',
-    href: 'https://www.whiteblue.com/solutions-dobby',
+    href: 'https://www.whiteblue.com/solutions-dobby-v2',
     image: 'assets/img/product-dobby.webp',
     logo: 'assets/img/logo-dobby.png',
     gradient: 'linear-gradient(89.66deg, #6ec8d7 4.97%, #2e43cf 104.55%)',
@@ -197,10 +197,9 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export interface CaseStudy { industry: string; title: string; icon: string; href: string; }
 export const CASE_STUDIES: CaseStudy[] = [
-  // Title is truncated in Figma ("…for a major"); confirm the full headline with the content team.
-  { industry: 'Ports & Maritime', title: 'Smart port operations for a major', icon: 'assets/icons/automation-sm.svg', href: 'https://www.whiteblue.com/case-studies' },
-  { industry: 'Insurance', title: 'AI-driven claims processing for a Fortune 500 insurance provider', icon: 'assets/icons/protection.svg', href: 'https://www.whiteblue.com/case-studies' },
-  { industry: 'Banking', title: 'Intelligent data operations for a leading regional bank', icon: 'assets/icons/banking.svg', href: 'https://www.whiteblue.com/case-studies' },
+  { industry: 'Ports & Logistics', title: 'Building a Unified Cloud & Analytics Platform for a Leading Indian Logistics Enterprise', icon: 'assets/icons/automation-sm.svg', href: 'https://www.whiteblue.com/post/case-study-building-a-unified-cloud-analytics-platform-for-a-leading-indian-logistics-enterprise' },
+  { industry: 'Banking', title: 'Data Pipeline Modernization for a Leading Bank in the Middle East', icon: 'assets/icons/banking.svg', href: 'https://www.whiteblue.com/post/case-study-data-pipeline-modernization-for-a-leading-bank-in-the-middle-east' },
+  { industry: 'Financial Services', title: 'Managed Services Transformation for a Leading U.S. Credit Union', icon: 'assets/icons/protection.svg', href: 'https://www.whiteblue.com/post/case-study-managed-services-transformation-for-a-leading-u-s-credit-union' },
 ];
 
 export const FOUNDER_NOTE = {
@@ -220,7 +219,7 @@ export interface FooterColumn { heading: string; links: NavLink[]; }
 export const FOOTER_COLUMNS: FooterColumn[] = [
   { heading: 'Products', links: [
     { label: 'InsureLiv', href: 'https://www.insureliv.com' },
-    { label: 'Dobby', href: 'https://www.whiteblue.com/solutions-dobby' },
+    { label: 'Dobby', href: 'https://www.whiteblue.com/solutions-dobby-v2' },
     { label: 'QuickQode', href: 'https://www.whiteblue.com/solutions-quickqode' },
     { label: 'FieldZapp', href: 'https://www.whiteblue.com/solutions-fieldzapp' },
   ] },
