@@ -71,3 +71,7 @@ Product photos are WebP to keep the page light. Their rounded transparent corner
 - **"Stay With Me" font:** licensed, so add its `@font-face` in `styles.scss`. Gochi Hand is the fallback until then.
 - **Case-study photos:** the cards use gradient backgrounds until the photos are supplied.
 - **Copy:** the first case-study title is cut off in Figma, and there's only one testimonial although the carousel is built for more.
+
+## Vercel preview deployment
+
+The review deployment is connected to the `review/india-website` branch in the `whiteblue-india-review` Vercel project. Commits pushed to this branch trigger a deployment for team review.
