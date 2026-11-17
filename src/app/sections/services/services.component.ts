@@ -42,7 +42,7 @@ import { SERVICES } from '../../content/site-content';
 
       <div class="wb-container services__inner">
         <wb-pill-label wbReveal icon="services" class="services__eyebrow">Services</wb-pill-label>
-        <h2 wbReveal class="wb-h2 services__title" id="services-title">From playbook to production</h2>
+        <h2 wbReveal class="wb-h2 services__title" id="services-title">From playbook to<br />production</h2>
         <p wbReveal [wbRevealDelay]="120" class="wb-lead services__lead">
           We bring the same deep-tech disciplines to every industry, shaped around how each one actually works.
         </p>
@@ -82,16 +82,16 @@ import { SERVICES } from '../../content/site-content';
       background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
-      background-size: 92px 92px;
-      background-position: 46px 0, 0 1px;
+      background-size: 98.77px 100px;
+      background-position: calc(50% - 900.7px) 0, 0 0;
       mask-image: linear-gradient(to bottom, #000 82%, transparent);
     }
     /* The cricket field is centred on the right edge and vertically within Services. */
     .services__field {
       --size: clamp(680px, 70vw, 968px);
       position: absolute;
-      right: calc(var(--size) * -0.5 + 52px);
-      top: 48.5%;
+      right: calc(var(--size) * -0.5 - 48px);
+      top: 56%;
       bottom: auto;
       translate: 0 -50%;
       width: var(--size);
@@ -108,7 +108,7 @@ import { SERVICES } from '../../content/site-content';
     .services__field-half--top .services__field-lines,
     .services__field-half--top .services__field-fielders,
     .services__field-half--bottom .services__field-lines,
-    .services__field-half--bottom .services__field-fielders { opacity: 0.38; }
+    .services__field-half--bottom .services__field-fielders { opacity: 0.3; }
     .services__field-lines > * {
       stroke-opacity: 0.95;
       stroke-dasharray: 1;
@@ -145,8 +145,8 @@ import { SERVICES } from '../../content/site-content';
     .services__lead { margin-top: var(--wb-space-sm); max-width: 900px; }
 
     .services__cards {
-      max-width: 964px;
-      margin-top: clamp(24px, 3vh, 36px);
+      max-width: 1000px;
+      margin-top: clamp(28px, 3.4vh, 40px);
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 20px;
@@ -192,30 +192,31 @@ import { SERVICES } from '../../content/site-content';
       .services {
         height: 100svh;
         min-height: 0;
-        padding-block: 20px;
+        padding-block: 12px;
       }
+      .services__inner { transform: translateY(55px); }
       .services__title {
         max-width: 720px;
-        font-size: clamp(2.15rem, 3.6vw, 3.2rem);
+        font-size: clamp(2.45rem, 3.6vw, 3.2rem);
         line-height: 1.12;
       }
       .services__lead {
-        max-width: 820px;
+        max-width: 760px;
         margin-top: 12px;
         font-size: 1rem;
         line-height: 1.35;
       }
-      .services__cards { margin-top: 18px; gap: 14px; }
+      .services__cards { margin-top: 22px; gap: 14px; }
       .card {
-        height: 168px;
-        min-height: 168px;
+        height: 152px;
+        min-height: 152px;
         padding: 14px;
         gap: 7px;
       }
-      .card__title { font-size: 1.45rem; line-height: 1.2; gap: 9px; }
+      .card__title { font-size: 1.55rem; line-height: 1.2; gap: 9px; }
       .card__title img { width: 30px; height: 30px; object-fit: contain; }
-      .card__text { font-size: 1rem; line-height: 1.38; }
-      .card__link { font-size: 1rem; }
+      .card__text { font-size: 1.05rem; line-height: 1.32; }
+      .card__link { font-size: 1.1rem; }
     }
     @media (max-width: 1100px) {
       .services__field { opacity: 0.8; }
