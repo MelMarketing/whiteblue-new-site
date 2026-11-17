@@ -156,13 +156,13 @@
 .hero__badge {
   display: inline-flex;
   align-items: center;
-  padding: 6px 18px;
+  padding: 5px 15px;
   border: 1px solid var(--wb-glass-border);
   border-radius: 70px;
   background: var(--wb-glass-fill);
   font-family: var(--wb-font-display);
   font-weight: 500;
-  font-size: clamp(0.9375rem, 0.94vw, 1.125rem);
+  font-size: clamp(0.875rem, 0.9vw, 1rem);
   color: var(--wb-white);
 }
 
