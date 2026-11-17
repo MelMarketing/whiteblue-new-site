@@ -74,11 +74,20 @@
               <circle class="pitch__mark pitch__mark--boundary" cx="16" cy="78" r="1950"
                       pathLength="1" vector-effect="non-scaling-stroke" />
             </g>
-            <!-- Popping and bowling creases, extended across the field towards the copy -->
-            <line class="pitch__mark pitch__mark--crease" x1="775" y1="362" x2="40" y2="630" pathLength="1"
+            <!-- Creases sit close to each set of stumps and extend only slightly beyond the pitch edges. -->
+            <line class="pitch__mark pitch__mark--crease" x1="851" y1="126" x2="515" y2="370" pathLength="1"
                   vector-effect="non-scaling-stroke" style="transition-delay: 300ms" />
-            <line class="pitch__mark pitch__mark--crease" x1="1137" y1="872" x2="250" y2="1196" pathLength="1"
+            <line class="pitch__mark pitch__mark--crease" x1="1289" y1="732" x2="953" y2="976" pathLength="1"
                   vector-effect="non-scaling-stroke" style="transition-delay: 420ms" />
+          </g>
+
+          <!-- Legacy core callout: the stem terminates on the pitch, not on the stumps. -->
+          <g class="pitch__callout">
+            <line class="pitch__callout-stem" x1="866" y1="238" x2="758" y2="323" />
+            <ellipse class="pitch__callout-node" cx="753" cy="330" rx="11" ry="6" />
+            <rect class="pitch__callout-pill" x="830" y="190" width="184" height="48" rx="24" />
+            <circle class="pitch__callout-dot" cx="851" cy="214" r="5.5" />
+            <text class="pitch__callout-text" x="870" y="221">Legacy core</text>
           </g>
         </svg>
       </div>
