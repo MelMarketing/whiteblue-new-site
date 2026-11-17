@@ -27,10 +27,10 @@ export const CLIENT_LOGOS: ClientLogo[] = [
 
 export interface Stat { value: string; accent: string; label: string; }
 export const STATS: Stat[] = [
-  { value: '2500', accent: '+', label: 'Global talent pool / qualified tech experts' },
-  { value: '90', accent: '%', label: 'Certified / enriched employees' },
+  { value: '180', accent: '+', label: 'Global talent pool' },
+  { value: '100', accent: '%', label: 'Certified workforce' },
   { value: '20', accent: '+', label: 'Global clients trusting our services' },
-  { value: '100', accent: '%', label: 'Compliance / ISO 27001 certified' },
+  { value: 'ISO 27001', accent: '', label: 'Certified' },
 ];
 
 export interface Industry {
