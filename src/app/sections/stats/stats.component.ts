@@ -67,6 +67,11 @@ import { RevealDirective } from '../../shared/reveal.directive';
       line-height: 1.36;
       color: var(--wb-ink-800);
     }
+    @media (min-width: 1281px) {
+      .stats__cell { min-height: clamp(180px, 12vw, 230px); }
+      .stats__value { font-size: clamp(2.5rem, 3.2vw, 3.875rem); line-height: 1.2; }
+      .stats__label { font-size: clamp(1rem, 1.1vw, 1.25rem); }
+    }
     @media (max-width: 1000px) {
       .stats__board { grid-template-columns: 1fr 1fr; }
       .stats__cell:nth-child(3) { border-left: 0; }
