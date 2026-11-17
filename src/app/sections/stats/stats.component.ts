@@ -29,7 +29,9 @@ import { RevealDirective } from '../../shared/reveal.directive';
     .stats {
       padding: clamp(28px, 2.4vw, 44px) 0 0;
       background: transparent;
-    }    /* Column widths follow the Figma dividers: 430 / 358 / 328 / 545 */
+    }
+
+    /* Column widths follow the Figma dividers: 430 / 358 / 328 / 545 */
     .stats__board {
       margin: 0;
       display: grid;
