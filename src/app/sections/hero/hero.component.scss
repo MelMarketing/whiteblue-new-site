@@ -93,22 +93,27 @@
 .nav__toggle[aria-expanded='true'] .nav__toggle-bar:nth-child(3) { opacity: 0; }
 .nav__toggle[aria-expanded='true'] .nav__toggle-bar:nth-child(4) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Desktop navigation: slightly shorter panel, tighter type and more balanced logo/CTA. */
+/* Desktop navigation: centred links, with logo and CTA balanced at each edge. */
 @media (min-width: 1281px) {
   .nav {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
     min-height: 76px;
     gap: 18px;
     padding: 9px 20px;
   }
+  .nav__logo {
+    justify-self: start;
+    margin-right: 0;
+  }
   .nav__logo img { width: clamp(160px, 9vw, 180px); }
   .nav__links {
+    justify-self: center;
     gap: 18px;
     font-size: clamp(1.0625rem, 1.05vw, 1.25rem);
   }
-  .nav__cta {
-    --wb-button-padding: 9px 20px;
-    --wb-button-font-size: clamp(1rem, 1.05vw, 1.125rem);
-  }
+  .nav__cta { justify-self: end; }
 }
 
 @media (max-width: 1280px) {
