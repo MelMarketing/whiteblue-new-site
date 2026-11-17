@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, HostListener, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/button.component';
-import { StatsComponent } from '../stats/stats.component';
 import { CLIENT_LOGOS, CONSULTATION_HREF, NAV_LINKS } from '../../content/site-content';
 
 /** Figma "header" (805:60723): floating glass nav, hero statement and client logos. */
 @Component({
   selector: 'wb-hero',
-  imports: [ButtonComponent, StatsComponent],
+  imports: [ButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss',
@@ -16,6 +15,12 @@ export class HeroComponent {
   protected readonly clientLogos = CLIENT_LOGOS;
   protected readonly consultationHref = CONSULTATION_HREF;
   protected readonly menuOpen = signal(false);
+  protected readonly scrolled = signal(false);
+
+  @HostListener('window:scroll')
+  protected onScroll(): void {
+    this.scrolled.set(window.scrollY > 40);
+  }
 
   protected toggleMenu(): void {
     this.menuOpen.update(open => !open);

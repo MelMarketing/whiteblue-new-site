@@ -3,16 +3,26 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
 /**
  * The square prev/next controls that flank the testimonial and case-study carousels.
  * Previous is outlined grey; next is the yellow filled button, as drawn in Figma.
+ * variant="chevron": just a bare ‹ › symbol on each side, no box.
  */
 @Component({
   selector: 'wb-carousel-arrows',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class.is-chevron]': "variant() === 'chevron'" },
   template: `
     <button type="button" class="arrow arrow--prev" (click)="previous.emit()" [disabled]="!canGoBack()" [attr.aria-label]="'Previous ' + itemLabel()">
-      <img src="assets/icons/arrow-left.svg" width="62" height="62" alt="" />
+      @if (variant() === 'chevron') {
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 4 7 12l8 8" /></svg>
+      } @else {
+        <img src="assets/icons/arrow-left.svg" width="62" height="62" alt="" />
+      }
     </button>
     <button type="button" class="arrow arrow--next" (click)="next.emit()" [disabled]="!canGoForward()" [attr.aria-label]="'Next ' + itemLabel()">
-      <img src="assets/icons/arrow-left.svg" width="62" height="62" alt="" />
+      @if (variant() === 'chevron') {
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 4l8 8-8 8" /></svg>
+      } @else {
+        <img src="assets/icons/arrow-left.svg" width="62" height="62" alt="" />
+      }
     </button>
   `,
   styles: `
@@ -48,12 +58,37 @@ import { ChangeDetectionStrategy, Component, input, output } from '@angular/core
       .arrow { width: 48px; height: 48px; }
       .arrow img { width: 44px; height: 44px; }
     }
+
+    /* Chevron variant: bare symbols, no box or fill */
+    :host(.is-chevron) .arrow,
+    :host(.is-chevron) .arrow--next:not(:disabled):hover {
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+    }
+    :host(.is-chevron) svg {
+      width: 36px;
+      height: 36px;
+      fill: none;
+      stroke: var(--wb-ink-600);
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.2s ease, transform 0.2s ease;
+    }
+    :host(.is-chevron) .arrow:not(:disabled):hover svg { stroke: var(--wb-blue); }
+    :host(.is-chevron) .arrow--prev:not(:disabled):hover svg { transform: translateX(-3px); }
+    :host(.is-chevron) .arrow--next:not(:disabled):hover svg { transform: translateX(3px); }
+    :host(.is-chevron) .arrow:disabled { opacity: 0.3; }
   `,
 })
 export class CarouselArrowsComponent {
   readonly canGoBack = input(true);
   readonly canGoForward = input(true);
   readonly itemLabel = input('slide');
+  readonly variant = input<'box' | 'chevron'>('box');
   readonly previous = output<void>();
   readonly next = output<void>();
 }

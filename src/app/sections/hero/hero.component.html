@@ -1,8 +1,8 @@
 <header class="hero" id="top">
   <div class="hero__grid" aria-hidden="true"></div>
 
-  <div class="nav-wrap wb-container">
-    <nav class="nav" aria-label="Primary">
+  <div class="nav-wrap wb-container" [class.nav-wrap--scrolled]="scrolled()">
+    <nav class="nav" [class.nav--scrolled]="scrolled()" aria-label="Primary">
       <a class="nav__logo" href="#top" aria-label="WhiteBlue home">
         <img src="assets/img/whiteblue-logo.png" width="213" height="47" alt="WhiteBlue" />
       </a>
@@ -36,12 +36,13 @@
     <p class="hero__badge">Solving challenges through deep tech</p>
 
     <h1 class="hero__title">
-      <span class="hero__white">AI</span> is only as smart as<br class="hero__break" />
-      what’s <span class="hero__white">underneath</span> it.
+      <span class="hero__line hero__white">Smarter ops, faster growth,</span>
+      <span class="hero__line">powered by the right tech.</span>
     </h1>
 
     <p class="hero__lead">
-      WhiteBlue builds what it stands on: secure APIs, modern data and automated cloud infrastructure, with agentic AI on top.
+      <span class="hero__lead-line">From cloud and data modernization to API services and agentic AI,</span>
+      <span class="hero__lead-line">WhiteBlue solves the right challenges for your business growth.</span>
     </p>
 
     <div class="hero__actions">
@@ -65,6 +66,4 @@
       }
     </ul>
   </section>
-
-  <wb-stats />
 </header>

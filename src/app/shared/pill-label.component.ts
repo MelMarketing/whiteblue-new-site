@@ -18,15 +18,15 @@ export type EyebrowIcon =
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      height: 40px;
-      padding: 8px 18px 8px 16px;
+      height: 36px;
+      padding: 6px 16px 6px 14px;
       border: 1px solid var(--wb-blue);
       border-radius: 32px;
       background: var(--wb-blue-tint);
       color: var(--wb-blue);
       font-family: var(--wb-font-display);
       font-weight: 700;
-      font-size: clamp(0.875rem, 0.95vw, 1.0625rem);
+      font-size: clamp(0.875rem, 0.85vw, 1rem); /* 16px max, was 22px */
       white-space: nowrap;
     }
     img { height: 18px; width: auto; max-width: 24px; flex: none; object-fit: contain; }

@@ -24,22 +24,76 @@
 }
 
 /* ---------- Nav ---------- */
-.nav-wrap { position: relative; z-index: 10; }
+.nav-wrap {
+  position: relative;
+  z-index: 100;
+  height: 74px; /* holds the nav's space in the page while the nav itself is fixed */
+}
 
+/* While scrolling: a full-width fade behind the nav, solid at the top of the window and
+   transparent just below the nav, so content scrolling up disappears under it.
+   Uses the current page colour (white for most sections) so it blends in. */
+.nav-wrap::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
+  background: linear-gradient(
+    to bottom,
+    var(--wb-page-bg, #fff) 0%,
+    var(--wb-page-bg, #fff) 55%,
+    color-mix(in srgb, var(--wb-page-bg, #fff) 0%, transparent) 100%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.nav-wrap--scrolled::before { opacity: 1; }
+
+/* Sticky: the nav stays pinned 32px from the top of the window while scrolling */
 .nav {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  translate: -50% 0; /* separate from transform, which the entrance animation uses */
+  width: min(var(--wb-container), 100% - 2 * var(--wb-gutter));
+  transition: background 0.3s ease, box-shadow 0.3s ease, top 0.35s ease, width 0.35s ease,
+    min-height 0.35s ease, padding 0.35s ease;
   display: flex;
   align-items: center;
   gap: 22px;
-  min-height: 82px;
-  padding: 13px 25px;
+  min-height: 74px;
+  padding: 11px 22px;
   border: 1px solid var(--wb-glass-border);
   border-radius: 70px;
   background: var(--wb-glass-fill);
   backdrop-filter: blur(10px);
 }
 
+/* Once the page scrolls off the blue hero, the white links need a solid blue backing */
+.nav--scrolled {
+  background: rgba(44, 88, 241, 0.92);
+  box-shadow: 0 10px 30px rgba(11, 21, 51, 0.18);
+}
+
+/* Condensed while scrolling: closer to the top, shorter, narrower, smaller contents */
+.nav--scrolled {
+  top: 12px;
+  width: min(1040px, 100% - 2 * var(--wb-gutter));
+  min-height: 56px;
+  padding: 6px 8px 6px 20px;
+}
+.nav__logo img { transition: width 0.35s ease; }
+.nav--scrolled .nav__logo img { width: clamp(120px, 7.5vw, 140px); }
+.nav__links { transition: font-size 0.35s ease; }
+.nav--scrolled .nav__links { font-size: clamp(0.9375rem, 0.95vw, 1.0625rem); }
+.nav--scrolled .nav__cta { --wb-fs-button: clamp(0.9375rem, 0.9vw, 1.0625rem); --wb-btn-pad: 8px 20px; }
+.nav--scrolled .nav__toggle { width: 42px; height: 42px; }
+
 .nav__logo { flex: none; margin-right: auto; }
-.nav__logo img { width: clamp(150px, 11.1vw, 213px); height: auto; }
+.nav__logo img { width: clamp(140px, 10vw, 192px); height: auto; }
 
 .nav__links {
   display: flex;
@@ -69,7 +123,17 @@
 }
 
 .nav__menu-cta { display: none; }
-.nav__cta { flex: none; }
+.nav__cta { flex: none; --wb-fs-button: clamp(1rem, 1.04vw, 1.25rem); }
+
+/* Desktop: links centered in the bar, logo left, CTA right */
+@media (min-width: 1281px) {
+  .nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .nav__logo { margin-right: 0; justify-self: start; }
+  .nav__cta { justify-self: end; }
+}
 
 .nav__toggle {
   display: none;
@@ -92,29 +156,6 @@
 .nav__toggle[aria-expanded='true'] .nav__toggle-bar:nth-child(2) { transform: translateY(7px) rotate(45deg); }
 .nav__toggle[aria-expanded='true'] .nav__toggle-bar:nth-child(3) { opacity: 0; }
 .nav__toggle[aria-expanded='true'] .nav__toggle-bar:nth-child(4) { transform: translateY(-7px) rotate(-45deg); }
-
-/* Desktop navigation: centred links, with logo and CTA balanced at each edge. */
-@media (min-width: 1281px) {
-  .nav {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    align-items: center;
-    min-height: 76px;
-    gap: 18px;
-    padding: 9px 20px;
-  }
-  .nav__logo {
-    justify-self: start;
-    margin-right: 0;
-  }
-  .nav__logo img { width: clamp(160px, 9vw, 180px); }
-  .nav__links {
-    justify-self: center;
-    gap: 18px;
-    font-size: clamp(1.0625rem, 1.05vw, 1.25rem);
-  }
-  .nav__cta { justify-self: end; }
-}
 
 @media (max-width: 1280px) {
   .nav__toggle { display: inline-flex; }
@@ -145,10 +186,14 @@
 .hero__content {
   position: relative;
   z-index: 1;
-  width: min(1142px, 100% - 2 * var(--wb-gutter));
+  width: min(1440px, 100% - 2 * var(--wb-gutter)); /* wide enough for each headline line on one row */
   margin: var(--wb-space-lg) auto 0;
+  /* Fill the rest of the first screen (below the nav), so the client logos start below the fold */
+  min-height: calc(100svh - 32px - 74px - var(--wb-space-lg));
+  padding-bottom: var(--wb-space-lg);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   text-align: center;
 }
@@ -156,40 +201,48 @@
 .hero__badge {
   display: inline-flex;
   align-items: center;
-  padding: 5px 15px;
+  padding: 6px 18px;
   border: 1px solid var(--wb-glass-border);
   border-radius: 70px;
   background: var(--wb-glass-fill);
   font-family: var(--wb-font-display);
   font-weight: 500;
-  font-size: clamp(0.875rem, 0.9vw, 1rem);
+  font-size: clamp(0.9375rem, 0.94vw, 1.125rem);
   color: var(--wb-white);
 }
 
 .hero__title {
   margin-top: var(--wb-space-sm);
-  font-family: var(--wb-font-display);
+  /* As in the hero reference: Manrope, first line white, second line dark, normal word spacing */
+  font-family: var(--wb-font-body);
   font-weight: 700;
   font-size: var(--wb-fs-hero);
-  line-height: 1.2;
-  letter-spacing: -0.015em;
-  word-spacing: -0.07em; /* tighter word gaps at display size */
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   color: var(--wb-ink);
 }
 .hero__white { color: var(--wb-white); }
+/* Each headline line is its own block, so the two lines always stack (no <br> needed) */
+.hero__line { display: block; }
+/* Subhead: second line always starts at "WhiteBlue" on wider screens; phones wrap naturally */
+@media (min-width: 721px) {
+  .hero__lead { max-width: none; }
+  .hero__lead-line { display: block; }
+}
+.hero__lead { margin-inline: auto; }
 
 .hero__lead {
   margin-top: var(--wb-space-sm);
-  max-width: 858px;
+  max-width: 880px;
   font-family: var(--wb-font-body);
   font-weight: 500;
-  font-size: var(--wb-fs-hero-lead);
-  line-height: 1.3;
+  font-size: clamp(1.0625rem, 1.6vw, 1.75rem); /* 28px max */
+  line-height: 1.32;
   color: var(--wb-ink-800);
 }
 
 .hero__actions {
-  margin-top: var(--wb-space-md);
+  margin-top: clamp(40px, 3.3vw, 64px);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -233,7 +286,6 @@
 }
 
 @media (max-width: 720px) {
-  .hero__break { display: none; }
   .hero__actions { gap: var(--wb-space-xs); }
   .clients__logos { justify-content: center; gap: 20px 36px; }
 }
@@ -247,14 +299,6 @@
 .hero__actions { animation: wb-rise 1s var(--wb-ease-out) 0.65s both; }
 .clients { animation: wb-rise 1s var(--wb-ease-out) 0.85s both; }
 
-/* "AI" and "underneath" get a light sweep once the title lands */
-.hero__white {
-  background: linear-gradient(100deg, #fff 40%, #ffe7ad 50%, #fff 60%) 0 0 / 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: wb-marquee-shine 2.2s var(--wb-ease-out) 1.2s both;
-}
 
 .clients__logo { transition: transform 0.3s var(--wb-ease-out), opacity 0.3s ease; opacity: 0.85; }
 .clients__logo:hover { transform: translateY(-3px); opacity: 1; }

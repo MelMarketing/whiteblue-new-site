@@ -22,7 +22,7 @@ import { INDUSTRIES } from '../../content/site-content';
         <ul class="bento">
           @for (industry of industries; track industry.number; let i = $index) {
             <li wbReveal [wbRevealDelay]="(i % 2) * 140" class="bento__card" [class.bento__card--yellow]="industry.tone === 'yellow'">
-              <article class="bento__inner" [style.background-image]="'url(' + industry.image + ')'">
+              <article class="bento__inner" [style.--bento-image]="'url(' + industry.image + ')'">
                 <span class="bento__number" aria-hidden="true">{{ industry.number }}</span>
                 <div class="bento__body">
                   <h3 class="bento__title">{{ industry.title }}</h3>
@@ -77,9 +77,9 @@ import { INDUSTRIES } from '../../content/site-content';
 
     .bento__card {
       display: flex;
-      min-height: clamp(320px, 20.9vw, 401px);
-      padding: 15px 16px;
-      border-radius: 24px;
+      min-height: clamp(250px, 15.6vw, 300px);
+      padding: 10px 11px;
+      border-radius: 20px;
       background: var(--wb-blue-soft);
     }
     .bento__card--yellow { background: var(--wb-yellow-soft); }
@@ -87,19 +87,29 @@ import { INDUSTRIES } from '../../content/site-content';
     .bento__inner {
       flex: 1;
       display: flex;
-      gap: clamp(12px, 1vw, 18px);
-      padding: 32px 34px 30px;
-      border-radius: 16px;
+      gap: clamp(10px, 0.8vw, 14px);
+      padding: 22px 26px 20px;
+      border-radius: 13px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
       background-color: #fff;
-      background-repeat: no-repeat;
-      background-position: center right;
-      transition: background-size 0.8s var(--wb-ease-out), box-shadow 0.4s var(--wb-ease-out);
-      background-size: auto 100%;
+      transition: box-shadow 0.4s var(--wb-ease-out);
     }
+    /* The illustration sits on its own layer so it can zoom in on hover without leaving gaps */
+    .bento__inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: var(--bento-image) center right / cover no-repeat;
+      transform-origin: center right;
+      transition: transform 0.8s var(--wb-ease-out);
+    }
+    .bento__card:hover .bento__inner::before { transform: scale(1.08); }
     .bento__card { transition: transform 0.45s var(--wb-ease-out); }
     .bento__card:hover { transform: translateY(-6px); }
-    /* The illustration pushes in slightly on hover */
-    .bento__card:hover .bento__inner { background-size: auto 108%; box-shadow: 0 16px 36px rgba(44, 88, 241, 0.14); }
+    .bento__card:hover .bento__inner { box-shadow: 0 16px 36px rgba(44, 88, 241, 0.14); }
     .bento__number { transition: color 0.35s ease; }
     .bento__card:hover .bento__number { color: rgba(44, 88, 241, 0.12); }
     .bento__link span[aria-hidden] { display: inline-block; transition: transform 0.3s var(--wb-ease-out); }
@@ -107,10 +117,10 @@ import { INDUSTRIES } from '../../content/site-content';
 
     .bento__number {
       flex: none;
-      width: 63px;
+      width: 44px;
       font-family: var(--wb-font-numeral);
       font-weight: 700;
-      font-size: var(--wb-fs-h3);
+      font-size: clamp(1.375rem, 1.67vw, 2rem); /* 32px max, was 48px */
       line-height: 1.23;
       color: transparent;
       -webkit-text-stroke: 1.2px var(--wb-blue);
@@ -124,30 +134,28 @@ import { INDUSTRIES } from '../../content/site-content';
     .bento__title {
       font-family: var(--wb-font-display);
       font-weight: 700;
-      font-size: var(--wb-fs-h3);
+      font-size: clamp(1.375rem, 1.67vw, 2rem); /* 32px max, was 48px */
       line-height: 1.21;
       color: var(--wb-ink);
     }
     .bento__text {
-      margin-top: var(--wb-space-xs);
+      margin-top: 10px;
       max-width: 592px;
       font-family: var(--wb-font-body);
-      font-size: var(--wb-fs-body-lg);
+      font-size: clamp(0.9375rem, 0.94vw, 1.125rem); /* 18px max, was 22px */
       line-height: 1.55;
       color: var(--wb-ink-600);
     }
     .bento__card:nth-child(2) .bento__text { max-width: 396px; }
     .bento__card:nth-child(3) .bento__text { max-width: 428px; }
     .bento__card:nth-child(4) .bento__text { max-width: 464px; }
-    .bento__link { margin-top: auto; padding-top: var(--wb-space-sm); }
+    .bento__link { margin-top: auto; padding-top: var(--wb-space-xs); font-size: clamp(1rem, 0.95vw, 1.125rem); }
 
     @media (max-width: 1100px) {
       .bento__card:nth-child(n) { flex-basis: 100%; }
-      .bento__inner { background-size: cover; }
-      .bento__card:hover .bento__inner { background-size: cover; }
     }
     @media (max-width: 600px) {
-      .bento__inner { flex-direction: column; padding: 24px; }
+      .bento__inner { flex-direction: column; padding: 20px; }
       .bento__card { padding: 10px; }
       .industries__rings { width: 180px; }
     }

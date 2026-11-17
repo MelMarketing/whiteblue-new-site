@@ -47,7 +47,7 @@
   --wb-fs-body-lg: clamp(1rem, 1.15vw, 1.375rem);       /* 22px  */
   --wb-fs-body: clamp(1rem, 1.04vw, 1.25rem);           /* 20px  */
   --wb-fs-button: clamp(1.0625rem, 1.15vw, 1.375rem);   /* 22px  */
-  --wb-fs-nav: clamp(1.0625rem, 1.25vw, 1.5rem);        /* 24px  */
+  --wb-fs-nav: clamp(1rem, 1.125vw, 1.35rem);           /* ~22px */
   --wb-lh-h2: 1.18;
 
   /* Layout */
@@ -201,44 +201,38 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .wb-reveal { opacity: 1 !important; transform: none !important; filter: none !important; }
 }
 
-/* Desktop rhythm: reduce oversized gaps between homepage sections. */
-@media (min-width: 1281px) {
-  :root { --wb-section-y: clamp(56px, 4.5vw, 88px); }
-}
-/* CTA outline shine: a narrow white highlight travels around the existing border. */
-@property --wb-cta-shine-angle {
+/* ---------- CTA "beam": a light that runs around a button's outline ----------
+   Add class="wb-beam" to any CTA. The existing outline stays; this draws a moving
+   highlight on top of it. Colours per button via --wb-beam-tail / --wb-beam-core,
+   and --wb-beam-border = the button's own border width so the beam sits on it. */
+@property --wb-beam-angle {
   syntax: '<angle>';
   inherits: false;
   initial-value: 0deg;
 }
-@keyframes wb-cta-outline-trace {
-  to { --wb-cta-shine-angle: 360deg; }
-}
-.wb-cta-shine {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-.wb-cta-shine::after {
+.wb-beam { position: relative; }
+.wb-beam::after {
   content: '';
   position: absolute;
-  inset: 0;
-  padding: 1px;
+  inset: calc(-1 * var(--wb-beam-border, 0px));
   border-radius: inherit;
+  padding: 1.5px;
   background: conic-gradient(
-    from var(--wb-cta-shine-angle),
-    transparent 0deg 292deg,
-    rgba(255, 255, 255, 0.16) 309deg,
-    rgba(255, 255, 255, 0.98) 326deg,
-    rgba(255, 255, 255, 0.2) 342deg,
+    from var(--wb-beam-angle),
+    transparent 0deg 250deg,
+    var(--wb-beam-tail, var(--wb-amber)) 310deg,
+    var(--wb-beam-core, #fff4d1) 350deg,
     transparent 360deg
   );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  filter: drop-shadow(0 0 3px var(--wb-beam-tail, var(--wb-amber)));
   pointer-events: none;
-  animation: wb-cta-outline-trace 3.4s linear infinite;
+  z-index: 1;
+  animation: wb-beam-spin 3s linear infinite;
 }
+@keyframes wb-beam-spin { to { --wb-beam-angle: 360deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .wb-cta-shine::after { animation: none; }
+  .wb-beam::after { animation: none; display: none; }
 }

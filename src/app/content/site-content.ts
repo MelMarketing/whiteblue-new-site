@@ -12,10 +12,10 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Industries', href: '#industries' },
   { label: 'Insights', href: '#case-studies' },
   { label: 'Company', href: '#founder' },
-  { label: 'Careers', href: 'https://www.whiteblue.com/careers' },
+  { label: 'Careers', href: '#' },
 ];
 
-export const CONSULTATION_HREF = 'https://www.whiteblue.com/get-in-touch-v2';
+export const CONSULTATION_HREF = '#contact';
 
 export interface ClientLogo { name: string; src: string; width: number; height: number; }
 export const CLIENT_LOGOS: ClientLogo[] = [
@@ -48,7 +48,7 @@ export const INDUSTRIES: Industry[] = [
     description: 'Modernize core banking and policy systems, connect credit union cores through APIs, and bring explainable AI into regulated workflows.',
     image: 'assets/img/industry-financial.png',
     tone: 'blue',
-    href: 'https://www.whiteblue.com/tech-blog/categories/case-study',
+    href: '#',
   },
   {
     number: '02',
@@ -56,7 +56,7 @@ export const INDUSTRIES: Industry[] = [
     description: 'Predict arrivals and delays, optimize capacity across your network, and automate booking, documentation and invoicing.',
     image: 'assets/img/industry-supply-chain.png',
     tone: 'yellow',
-    href: 'https://www.whiteblue.com/tech-blog/categories/case-study',
+    href: '#',
   },
   {
     number: '03',
@@ -64,7 +64,7 @@ export const INDUSTRIES: Industry[] = [
     description: 'Speed up engineering with AI coding accelerators, Infrastructure-as-Code and API-first platforms.',
     image: 'assets/img/industry-hitech.png',
     tone: 'yellow',
-    href: 'https://www.whiteblue.com/tech-blog/categories/case-study',
+    href: '#',
   },
   {
     number: '04',
@@ -72,7 +72,7 @@ export const INDUSTRIES: Industry[] = [
     description: 'Unify plant and IoT data, connect legacy systems through APIs, and give field teams apps that keep working offline.',
     image: 'assets/img/industry-manufacturing.png',
     tone: 'blue',
-    href: 'https://www.whiteblue.com/tech-blog/categories/case-study',
+    href: '#',
   },
 ];
 
@@ -84,7 +84,7 @@ export const SERVICES: Service[] = [
     linkLabel: 'Explore API services',
     icon: 'assets/icons/api.svg',
     iconSize: 42,
-    href: 'https://www.whiteblue.com/capabilities-services/api',
+    href: '#',
   },
   {
     title: 'Data Modernization',
@@ -92,7 +92,7 @@ export const SERVICES: Service[] = [
     linkLabel: 'Explore data modernization',
     icon: 'assets/icons/data.svg',
     iconSize: 42,
-    href: 'https://www.whiteblue.com/capabilities-services/data-modernization',
+    href: '#',
   },
   {
     title: 'Infra Automation',
@@ -100,7 +100,7 @@ export const SERVICES: Service[] = [
     linkLabel: 'Explore infra automation',
     icon: 'assets/icons/automation.svg',
     iconSize: 42,
-    href: 'https://www.whiteblue.com/capabilities-services/infra-automation',
+    href: '#',
   },
   {
     title: 'Agentic AI',
@@ -109,7 +109,7 @@ export const SERVICES: Service[] = [
     linkLabel: 'Explore agentic AI',
     icon: 'assets/icons/agentic.svg',
     iconSize: 36,
-    href: 'https://www.whiteblue.com/capabilities-services-v2/agentic-ai-v2',
+    href: '#',
   },
 ];
 
@@ -132,8 +132,8 @@ export const PRODUCTS: Product[] = [
     name: 'InsureLiv',
     tagline: 'AI-native insurance distribution.',
     summary: 'AI-native insurance distribution for brokers and insurers.',
-    ctaLabel: 'Visit InsureLiv',
-    href: 'https://www.insureliv.com',
+    ctaLabel: 'Visit insurelive.com',
+    href: 'https://insurelive.com',
     image: 'assets/img/product-insureliv.webp',
     wordmark: 'assets/img/insureliv-logo.svg',
     logo: 'assets/img/insureliv-mark.svg', // diamond mark cut from the wordmark
@@ -144,7 +144,7 @@ export const PRODUCTS: Product[] = [
     tagline: 'Automate tasks with AI.',
     summary: 'Automate tasks with AI.',
     ctaLabel: 'Learn about Dobby',
-    href: 'https://www.whiteblue.com/solutions-dobby-v2',
+    href: '#',
     image: 'assets/img/product-dobby.webp',
     logo: 'assets/img/logo-dobby.png',
     gradient: 'linear-gradient(89.66deg, #6ec8d7 4.97%, #2e43cf 104.55%)',
@@ -154,7 +154,7 @@ export const PRODUCTS: Product[] = [
     tagline: 'Build, test, and deploy code faster.',
     summary: 'Build, test, and deploy code faster.',
     ctaLabel: 'Learn about QuickQode',
-    href: 'https://www.whiteblue.com/solutions-quickqode',
+    href: '#',
     image: 'assets/img/product-quickqode.webp',
     logo: 'assets/img/logo-quickqode.png',
     gradient: 'linear-gradient(90deg, #7170d5 0%, #74409e 66.07%)',
@@ -164,7 +164,7 @@ export const PRODUCTS: Product[] = [
     tagline: 'Streamline field operations and team management.',
     summary: 'Streamline field operations and team management.',
     ctaLabel: 'Learn about FieldZapp',
-    href: 'https://www.whiteblue.com/solutions-fieldzapp',
+    href: '#',
     image: 'assets/img/product-fieldzapp.webp',
     logo: 'assets/img/logo-fieldzapp.png',
     gradient: 'linear-gradient(90deg, #ac5a84 0%, #843b8c 66.07%)',
@@ -197,9 +197,10 @@ export const TESTIMONIALS: Testimonial[] = [
 
 export interface CaseStudy { industry: string; title: string; icon: string; href: string; }
 export const CASE_STUDIES: CaseStudy[] = [
-  { industry: 'Ports & Logistics', title: 'Building a Unified Cloud & Analytics Platform for a Leading Indian Logistics Enterprise', icon: 'assets/icons/automation-sm.svg', href: 'https://www.whiteblue.com/post/case-study-building-a-unified-cloud-analytics-platform-for-a-leading-indian-logistics-enterprise' },
-  { industry: 'Banking', title: 'Data Pipeline Modernization for a Leading Bank in the Middle East', icon: 'assets/icons/banking.svg', href: 'https://www.whiteblue.com/post/case-study-data-pipeline-modernization-for-a-leading-bank-in-the-middle-east' },
-  { industry: 'Financial Services', title: 'Managed Services Transformation for a Leading U.S. Credit Union', icon: 'assets/icons/protection.svg', href: 'https://www.whiteblue.com/post/case-study-managed-services-transformation-for-a-leading-u-s-credit-union' },
+  // Title is truncated in Figma ("…for a major"); confirm the full headline with the content team.
+  { industry: 'Ports & Maritime', title: 'Smart port operations for a major', icon: 'assets/icons/automation-sm.svg', href: '#' },
+  { industry: 'Insurance', title: 'AI-driven claims processing for a Fortune 500 insurance provider', icon: 'assets/icons/protection.svg', href: '#' },
+  { industry: 'Banking', title: 'Intelligent data operations for a leading regional bank', icon: 'assets/icons/banking.svg', href: '#' },
 ];
 
 export const FOUNDER_NOTE = {
@@ -217,32 +218,24 @@ export const FOUNDER_NOTE = {
 
 export interface FooterColumn { heading: string; links: NavLink[]; }
 export const FOOTER_COLUMNS: FooterColumn[] = [
-  { heading: 'Products', links: [
-    { label: 'InsureLiv', href: 'https://www.insureliv.com' },
-    { label: 'Dobby', href: 'https://www.whiteblue.com/solutions-dobby-v2' },
-    { label: 'QuickQode', href: 'https://www.whiteblue.com/solutions-quickqode' },
-    { label: 'FieldZapp', href: 'https://www.whiteblue.com/solutions-fieldzapp' },
-  ] },
-  { heading: 'Services', links: [
-    { label: 'API Services', href: 'https://www.whiteblue.com/capabilities-services/api' },
-    { label: 'Data Modernization', href: 'https://www.whiteblue.com/capabilities-services/data-modernization' },
-    { label: 'Infra Automation', href: 'https://www.whiteblue.com/capabilities-services/infra-automation' },
-    { label: 'Agentic AI', href: 'https://www.whiteblue.com/capabilities-services-v2/agentic-ai-v2' },
-  ] },
-  { heading: 'Company', links: [
-    { label: 'About Us', href: 'https://www.whiteblue.com/purpose-leadership' },
-    { label: 'Leadership', href: 'https://www.whiteblue.com/meet-our-leaders' },
-    { label: 'News & Insights', href: 'https://www.whiteblue.com/blog' },
-    { label: 'Careers', href: 'https://www.whiteblue.com/careers' },
-  ] },
+  { heading: 'Products', links: ['InsureLiv', 'Dobby', 'Quickqode', 'FieldZapp'].map(label => ({ label, href: '#products' })) },
+  { heading: 'Services', links: ['API Services', 'Data Modernization', 'Infra Automation', 'Agentic AI'].map(label => ({ label, href: '#services' })) },
+  { heading: 'Company', links: ['About Us', 'Leadership', 'News & Insights', 'Careers'].map(label => ({ label, href: '#' })) },
 ];
 
 export const SOCIAL_LINKS = [
-  { label: 'LinkedIn', icon: 'assets/icons/linkedin.svg', href: 'https://www.linkedin.com/company/whiteblue-ai-services/' },
+  { label: 'LinkedIn', icon: 'assets/icons/linkedin.svg', href: '#' },
+  { label: 'Instagram', icon: 'assets/icons/instagram.svg', href: '#' },
+  { label: 'YouTube', icon: 'assets/icons/youtube.svg', href: '#' },
+  // X is switched off for now; uncomment to show it again.
+  // { label: 'X (Twitter)', icon: 'assets/icons/x.svg', href: '#' },
 ];
 
 export const LEGAL_LINKS: NavLink[] = [
-  { label: 'Privacy', href: 'https://www.whiteblue.com/privacy-policy' },
+  { label: 'Privacy', href: '#' },
+  { label: 'Cookies', href: '#' },
+  { label: 'Terms', href: '#' },
+  { label: 'Cookies Preferences', href: '#' },
 ];
 
 /** Office pins drawn on the globe image: where each pin touches the globe, as % of the 350 × 366 image. */
@@ -261,9 +254,9 @@ export const SECTION_THEMES = {
   everyPitch: '#f7f8fd', // matches the pitch video's background so its edges disappear
   stats: '#ffffff',
   industries: '#f8f9fb',
-  services: '#ffdb57',
+  services: '#ffd06a',
   products: '#eaf2fe',
-  testimonials: '#ffffff',
+  testimonials: '#ffd06a', // same yellow as Services
   caseStudies: '#f8f9fb',
   founder: '#fdfeff',
   footer: '#f0f6ff',

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HeroComponent } from './sections/hero/hero.component';
 import { EveryPitchComponent } from './sections/every-pitch/every-pitch.component';
+import { StatsComponent } from './sections/stats/stats.component';
 import { IndustriesComponent } from './sections/industries/industries.component';
 import { ServicesComponent } from './sections/services/services.component';
 import { ProductsComponent } from './sections/products/products.component';
@@ -17,6 +18,7 @@ import { SECTION_THEMES } from './content/site-content';
   imports: [
     HeroComponent,
     EveryPitchComponent,
+    StatsComponent,
     IndustriesComponent,
     ServicesComponent,
     ProductsComponent,
@@ -31,6 +33,7 @@ import { SECTION_THEMES } from './content/site-content';
     <!-- Each section sets the page colour while it's in the middle of the screen -->
     <wb-hero [wbSectionTheme]="themes.hero" />
     <main>
+      <wb-stats [wbSectionTheme]="themes.stats" />
       <wb-every-pitch [wbSectionTheme]="themes.everyPitch" />
       <wb-industries [wbSectionTheme]="themes.industries" />
       <wb-services [wbSectionTheme]="themes.services" />

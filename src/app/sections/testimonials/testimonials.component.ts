@@ -11,7 +11,8 @@ import { TESTIMONIALS } from '../../content/site-content';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="testimonials" aria-labelledby="testimonials-title">
-      <div class="wb-container">
+      <div class="testimonials__grid-lines" aria-hidden="true"></div>
+      <div class="wb-container testimonials__inner">
         <header class="testimonials__head" wbReveal>
           <wb-pill-label icon="testimonials">Testimonials</wb-pill-label>
           <h2 class="wb-h2" id="testimonials-title"><span class="wb-accent">What our</span> clients say</h2>
@@ -39,6 +40,7 @@ import { TESTIMONIALS } from '../../content/site-content';
           }
 
           <wb-carousel-arrows
+            variant="chevron"
             itemLabel="testimonial"
             [canGoBack]="testimonials.length > 1"
             [canGoForward]="testimonials.length > 1"
@@ -56,7 +58,26 @@ import { TESTIMONIALS } from '../../content/site-content';
   `,
   styles: `
     :host { display: block; }
-    .testimonials { padding: var(--wb-section-y) 0; background: transparent; }
+    .testimonials {
+      /* Tighter than other sections so the whole section fits in one screen height */
+      position: relative;
+      padding: clamp(40px, 3.4vw, 64px) 0;
+      background: transparent;
+    }
+    /* Same white hairline grid as Services, fading out at the top and bottom of the section */
+    .testimonials__grid-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
+      background-size: 98.77px 100px;
+      background-position: calc(50% - 900.7px) 0, 0 0;
+      mask-image: linear-gradient(to bottom, transparent, #000 15%, #000 85%, transparent);
+      animation: wb-grid-drift 30s linear infinite;
+    }
+    .testimonials__inner { position: relative; z-index: 1; }
     .testimonials__head {
       max-width: 902px;
       margin: 0 auto;
@@ -66,52 +87,51 @@ import { TESTIMONIALS } from '../../content/site-content';
       gap: var(--wb-space-xs);
       text-align: center;
     }
-    .testimonials__head .wb-lead { margin-top: calc(var(--wb-space-sm) - var(--wb-space-xs)); }
+    .testimonials__head .wb-lead { margin-top: 0; }
 
-    .stage { position: relative; margin: var(--wb-space-lg) clamp(0px, 1.2vw, 23px) 0; }
-    .stage wb-carousel-arrows { inset-inline: calc(-1 * clamp(0px, 3.06vw, 58px)); }
+    .stage { position: relative; max-width: 1080px; margin: var(--wb-space-md) auto 0; }
+    .stage wb-carousel-arrows { inset-inline: calc(-1 * clamp(52px, 4.2vw, 76px)); }
 
     .quote-card {
       margin: 0;
-      min-height: clamp(420px, 28.96vw, 556px);
-      padding: clamp(32px, 2.8vw, 54px) clamp(28px, 5.03vw, 96.5px) clamp(40px, 3.5vw, 68px);
+      padding: clamp(24px, 2.1vw, 40px) clamp(24px, 3.4vw, 64px);
       border: 1px solid var(--wb-blue);
-      border-radius: 28px;
+      border-radius: 22px;
       background: linear-gradient(90deg, #ac5a84 0%, #96579d 66%);
       box-shadow: 4px 4px 14px rgba(0, 0, 0, 0.07);
       color: #fff;
     }
     /* Client logos are shown as white monochrome marks, straight on the card */
-    .quote-card__logo img { height: clamp(40px, 2.8vw, 54px); width: auto; }
-    .quote-card__text { margin: 32px 0 0; max-width: 1320px; }
+    .quote-card__logo img { height: clamp(30px, 2vw, 38px); width: auto; }
+    .quote-card__text { margin: 18px 0 0; }
     .quote-card__text p {
       font-family: var(--wb-font-display);
       font-style: italic;
       font-weight: 500;
-      font-size: var(--wb-fs-quote);
-      line-height: 1.24;
+      font-size: clamp(1.125rem, 1.4vw, 1.625rem); /* 26px max, was 42px */
+      line-height: 1.38;
     }
     .quote-card__text strong { font-weight: 700; color: var(--wb-yellow); }
 
-    .quote-card__author { margin-top: 12px; display: flex; align-items: center; gap: 22px; }
+    .quote-card__author { margin-top: 20px; display: flex; align-items: center; gap: 16px; }
     .quote-card__avatar {
       flex: none;
-      width: 80px;
-      height: 80px;
+      width: 56px;
+      height: 56px;
       display: grid;
       place-items: center;
       border-radius: 50%;
       background: var(--wb-yellow);
       font-family: var(--wb-font-display);
       font-weight: 700;
-      font-size: 2.125rem;
+      font-size: 1.375rem;
       color: #000;
     }
-    .quote-card__name, .quote-card__role { display: block; font-size: clamp(1.125rem, 1.46vw, 1.75rem); line-height: 1.36; }
+    .quote-card__name, .quote-card__role { display: block; font-size: clamp(1rem, 1.05vw, 1.25rem); line-height: 1.36; }
     .quote-card__name { font-family: var(--wb-font-body); font-weight: 600; }
-    .quote-card__role { margin-top: 4px; font-family: var(--wb-font-display); font-style: italic; }
+    .quote-card__role { margin-top: 2px; font-family: var(--wb-font-display); font-style: italic; }
 
-    .dots { margin-top: var(--wb-space-md); display: flex; justify-content: center; gap: var(--wb-space-2xs); }
+    .dots { margin-top: var(--wb-space-sm); display: flex; justify-content: center; gap: var(--wb-space-2xs); }
     .dots__dot { width: 12px; height: 12px; border-radius: 6px; background: #d9d9d9; transition: background-color 0.3s ease, width 0.4s var(--wb-ease-out); }
     .dots__dot--active { width: 32px; background: var(--wb-blue); }
 
@@ -127,16 +147,6 @@ import { TESTIMONIALS } from '../../content/site-content';
     @keyframes highlight { to { background-size: 100% 100%; } }
     .quote-card__avatar { animation: avatar-pop 0.6s var(--wb-ease-spring) 0.35s both; }
     @keyframes avatar-pop { from { transform: scale(0.4); opacity: 0; } to { transform: none; opacity: 1; } }
-
-    @media (min-width: 1281px) {
-      .quote-card {
-        background: linear-gradient(110deg, #1b3fb5 0%, #2c58f1 100%);
-      }
-      .quote-card__text p {
-        font-size: clamp(1.5rem, 1.85vw, 2.25rem);
-        line-height: 1.3;
-      }
-    }
 
     @media (max-width: 720px) {
       .stage wb-carousel-arrows { inset-inline: -8px; top: auto; bottom: -84px; transform: none; justify-content: center; gap: 16px; }

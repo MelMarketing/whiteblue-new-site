@@ -9,7 +9,7 @@ import { RevealDirective } from '../../shared/reveal.directive';
   imports: [CountUpDirective, RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section class="stats" aria-label="WhiteBlue at a glance">
+    <section class="stats" aria-label="Track record">
       <div class="wb-container">
         <dl wbReveal="zoom" class="stats__board">
           @for (stat of stats; track stat.label; let i = $index) {
@@ -27,10 +27,10 @@ import { RevealDirective } from '../../shared/reveal.directive';
   styles: `
     :host { display: block; }
     .stats {
-      padding: clamp(28px, 2.4vw, 44px) 0 0;
+      /* Sits directly under the client logos, so no top padding */
+      padding: 0 0 var(--wb-section-y);
       background: transparent;
     }
-
     /* Column widths follow the Figma dividers: 430 / 358 / 328 / 545 */
     .stats__board {
       margin: 0;
@@ -41,11 +41,12 @@ import { RevealDirective } from '../../shared/reveal.directive';
     .stats__cell {
       display: flex;
       flex-direction: column-reverse;
-      justify-content: center;
+      /* Numbers start from the same top line in every box (column-reverse: flex-end = top) */
+      justify-content: flex-end;
       align-items: center;
       gap: 8px;
-      min-height: clamp(200px, 14.6vw, 281px);
-      padding: 32px clamp(16px, 2vw, 40px);
+      min-height: clamp(150px, 10.5vw, 200px);
+      padding: clamp(28px, 2.3vw, 44px) clamp(16px, 2vw, 40px) 32px;
       text-align: center;
     }
     .stats__cell + .stats__cell { border-left: 1px solid var(--wb-line); }
@@ -55,7 +56,7 @@ import { RevealDirective } from '../../shared/reveal.directive';
       margin: 0;
       font-family: var(--wb-font-display);
       font-weight: 900;
-      font-size: var(--wb-fs-h2);
+      font-size: clamp(1.75rem, 2.9vw, 3.5rem); /* 56px max, was 78px */
       line-height: 1.35;
       color: var(--wb-ink-900);
       white-space: nowrap;
@@ -66,11 +67,6 @@ import { RevealDirective } from '../../shared/reveal.directive';
       font-size: var(--wb-fs-lead);
       line-height: 1.36;
       color: var(--wb-ink-800);
-    }
-    @media (min-width: 1281px) {
-      .stats__cell { min-height: clamp(180px, 12vw, 230px); }
-      .stats__value { font-size: clamp(2.5rem, 3.2vw, 3.875rem); line-height: 1.2; }
-      .stats__label { font-size: clamp(1rem, 1.1vw, 1.25rem); }
     }
     @media (max-width: 1000px) {
       .stats__board { grid-template-columns: 1fr 1fr; }
@@ -87,7 +83,7 @@ import { RevealDirective } from '../../shared/reveal.directive';
 export class StatsComponent {
   protected readonly stats = STATS;
 
-  /** Numeric proof points count up; the ISO certification text remains static. */
+  /** "2500" counts up; "ISO " is static text. */
   protected asNumber(value: string): number | null {
     return /^\d+$/.test(value) ? Number(value) : null;
   }

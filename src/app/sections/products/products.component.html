@@ -18,6 +18,7 @@
           class="deck__card"
           [class.deck__card--active]="isActive"
           [class.deck__card--after-active]="i === activeIndex() + 1"
+          [class.deck__card--covered]="!isActive && i < products.length - 1 && i + 1 !== activeIndex()"
           [style.z-index]="isActive ? 1 : i + 1"
           [style.--card-bg]="product.gradient">
 
@@ -37,7 +38,7 @@
                 }
                 <div class="panel__row">
                   <p class="panel__summary">{{ product.summary }}</p>
-                  <a class="panel__cta wb-cta-shine" [href]="product.href" [attr.target]="product.href.startsWith('http') ? '_blank' : null" rel="noopener">{{ product.ctaLabel }}</a>
+                  <a class="panel__cta wb-beam" [href]="product.href" [attr.target]="product.href.startsWith('http') ? '_blank' : null" rel="noopener">{{ product.ctaLabel }}</a>
                 </div>
               </div>
             </article>
@@ -52,7 +53,7 @@
               </span>
               <span class="tab__name">{{ product.name }}</span>
               <span class="tab__tagline">{{ product.tagline }}</span>
-              <span class="tab__expand">Click to expand <span aria-hidden="true">→</span></span>
+              <span class="tab__expand">Click to <span class="tab__expand-end">expand <span aria-hidden="true">→</span></span></span>
             </button>
           }
         </li>

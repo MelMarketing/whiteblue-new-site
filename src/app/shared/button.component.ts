@@ -8,27 +8,30 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 @Component({
   selector: 'wb-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<a class="btn wb-cta-shine" [class.btn--light]="variant() === 'light'" [attr.href]="href()"><ng-content /></a>`,
+  host: { class: 'wb-beam' },
+  template: `<a class="btn" [class.btn--light]="variant() === 'light'" [attr.href]="href()"><ng-content /></a>`,
   styles: `
-    :host { display: inline-flex; }
+    :host { display: inline-flex; border-radius: var(--wb-radius-pill); }
+    /* Keep the outline beam (drawn on the host) moving with the button's hover lift */
+    :host::after { transition: transform 0.2s ease; }
+    :host(:hover)::after { transform: translateY(-2px); }
+    :host(:active)::after { transform: translateY(1px); }
+    :host([variant='light']) { --wb-beam-tail: var(--wb-blue); --wb-beam-core: #a9c0ff; }
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 180px;
-      height: 44px;
-      min-height: 44px;
-      padding: 0 20px;
+      padding: var(--wb-btn-pad, 12px 24px);
       border-radius: var(--wb-radius-pill);
       border: 1px solid var(--wb-amber);
       background: var(--wb-blue);
       color: var(--wb-white);
       font-family: var(--wb-font-display);
       font-weight: 700;
-      font-size: clamp(1rem, 1.05vw, 1.125rem);
-      line-height: 1;
+      font-size: var(--wb-fs-button);
+      line-height: 1.35;
       white-space: nowrap;
-      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, padding 0.35s ease, font-size 0.35s ease;
     }
     .btn { position: relative; overflow: hidden; isolation: isolate; }
     .btn::before {

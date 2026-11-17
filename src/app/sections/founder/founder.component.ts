@@ -100,8 +100,8 @@ import { FOUNDER_NOTE } from '../../content/site-content';
     .note__body { margin: var(--wb-space-md) 0 0; display: flex; flex-direction: column; gap: var(--wb-space-sm); }
     .note__body p {
       font-family: var(--wb-font-hand);
-      font-size: clamp(1.5rem, 2.24vw, 2.6875rem);
-      line-height: 1.26;
+      font-size: clamp(1.25rem, 1.56vw, 1.875rem); /* 30px max, was 43px */
+      line-height: 1.32;
       color: #4b4a4a;
     }
 
@@ -117,18 +117,6 @@ import { FOUNDER_NOTE } from '../../content/site-content';
     }
     .note__name { display: block; font-family: var(--wb-font-display); font-weight: 700; font-size: clamp(1.5rem, 1.98vw, 2.375rem); line-height: 1.16; }
     .note__role { display: block; margin-top: 4px; font-family: var(--wb-font-body); font-size: clamp(1.0625rem, 1.2vw, 1.4375rem); line-height: 1.48; }
-
-    @media (min-width: 1281px) {
-      .note__body { max-width: 1020px; gap: 22px; }
-      .note__body p {
-        font-family: var(--wb-font-body);
-        font-size: clamp(1.125rem, 1.2vw, 1.375rem);
-        font-weight: 400;
-        line-height: 1.7;
-        letter-spacing: 0;
-        color: #424a56;
-      }
-    }
 
     @media (max-width: 720px) {
       .note { grid-template-columns: 1fr; }
