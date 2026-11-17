@@ -30,7 +30,7 @@ export const STATS: Stat[] = [
   { value: '180', accent: '+', label: 'Global talent pool' },
   { value: '100', accent: '%', label: 'Certified workforce' },
   { value: '20', accent: '+', label: 'Global clients trusting our services' },
-  { value: 'ISO 27001', accent: '', label: 'Certified' },
+  { value: 'ISO ', accent: '27001', label: 'Certified' },
 ];
 
 export interface Industry {
