@@ -1,21 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { STATS } from '../../content/site-content';
-import { PillLabelComponent } from '../../shared/pill-label.component';
 import { CountUpDirective } from '../../shared/count-up.directive';
 import { RevealDirective } from '../../shared/reveal.directive';
 
 /** Figma "trust-sats" (805:60792): "The scoreboard so far". */
 @Component({
   selector: 'wb-stats',
-  imports: [CountUpDirective, RevealDirective, PillLabelComponent],
+  imports: [CountUpDirective, RevealDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <section class="stats" aria-labelledby="stats-title">
+    <section class="stats" aria-label="WhiteBlue at a glance">
       <div class="wb-container">
-        <header class="stats__head" wbReveal>
-          <wb-pill-label icon="track-record">Track record</wb-pill-label>
-          <h2 class="wb-h2 stats__title" id="stats-title">The scoreboard so far</h2>
-        </header>
         <dl wbReveal="zoom" class="stats__board">
           @for (stat of stats; track stat.label; let i = $index) {
             <div class="stats__cell" wbReveal [wbRevealDelay]="200 + i * 110">
@@ -32,14 +27,11 @@ import { RevealDirective } from '../../shared/reveal.directive';
   styles: `
     :host { display: block; }
     .stats {
-      padding: var(--wb-section-y) 0;
+      padding: clamp(28px, 2.4vw, 44px) 0 0;
       background: transparent;
-    }
-    .stats__head { display: flex; flex-direction: column; align-items: center; gap: var(--wb-space-xs); }
-    .stats__title { text-align: center; }
-    /* Column widths follow the Figma dividers: 430 / 358 / 328 / 545 */
+    }    /* Column widths follow the Figma dividers: 430 / 358 / 328 / 545 */
     .stats__board {
-      margin: var(--wb-space-lg) 0 0;
+      margin: 0;
       display: grid;
       grid-template-columns: 430fr 358fr 328fr 545fr;
       border: 1px solid var(--wb-line);
@@ -55,11 +47,8 @@ import { RevealDirective } from '../../shared/reveal.directive';
       text-align: center;
     }
     .stats__cell + .stats__cell { border-left: 1px solid var(--wb-line); }
-    .stats__cell { transition: background-color 0.3s ease; }
-    .stats__cell:hover { background-color: rgba(255, 255, 255, 0.7); }
     .stats__value { font-variant-numeric: tabular-nums; }
-    .stats__accent { display: inline-block; transition: transform 0.4s var(--wb-ease-spring); }
-    .stats__cell:hover .stats__accent { transform: scale(1.15) rotate(-4deg); }
+    .stats__accent { display: inline-block; }
     .stats__value {
       margin: 0;
       font-family: var(--wb-font-display);
@@ -91,7 +80,7 @@ import { RevealDirective } from '../../shared/reveal.directive';
 export class StatsComponent {
   protected readonly stats = STATS;
 
-  /** "2500" counts up; "ISO " is static text. */
+  /** Numeric proof points count up; the ISO certification text remains static. */
   protected asNumber(value: string): number | null {
     return /^\d+$/.test(value) ? Number(value) : null;
   }
