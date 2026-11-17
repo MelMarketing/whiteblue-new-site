@@ -261,7 +261,7 @@ export const SECTION_THEMES = {
   everyPitch: '#f7f8fd', // matches the pitch video's background so its edges disappear
   stats: '#ffffff',
   industries: '#f8f9fb',
-  services: '#ffd06a',
+  services: '#ffdb57',
   products: '#eaf2fe',
   testimonials: '#ffffff',
   caseStudies: '#f8f9fb',
