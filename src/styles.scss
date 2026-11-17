@@ -205,3 +205,40 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (min-width: 1281px) {
   :root { --wb-section-y: clamp(56px, 4.5vw, 88px); }
 }
+/* CTA outline shine: a narrow white highlight travels around the existing border. */
+@property --wb-cta-shine-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes wb-cta-outline-trace {
+  to { --wb-cta-shine-angle: 360deg; }
+}
+.wb-cta-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.wb-cta-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--wb-cta-shine-angle),
+    transparent 0deg 292deg,
+    rgba(255, 255, 255, 0.16) 309deg,
+    rgba(255, 255, 255, 0.98) 326deg,
+    rgba(255, 255, 255, 0.2) 342deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: wb-cta-outline-trace 3.4s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wb-cta-shine::after { animation: none; }
+}
