@@ -85,8 +85,8 @@ import { SERVICES } from '../../content/site-content';
       height: min(945px, 100%); /* stay inside the section now it no longer clips */
       pointer-events: none;
       background-image:
-        linear-gradient(to right, rgba(44, 88, 241, 0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(44, 88, 241, 0.06) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
       background-size: 98.77px 100px;
       background-position: calc(50% - 900.7px) 0, 0 0;
       mask-image: linear-gradient(to bottom, #000 75%, transparent);
@@ -104,7 +104,7 @@ import { SERVICES } from '../../content/site-content';
       pointer-events: none;
       z-index: 0;
     }
-    .services__field-half--top { stroke: rgba(44, 88, 241, 0.2); }
+    .services__field-half--top { stroke: #fff; }
     .services__field-half--bottom { stroke: var(--wb-blue); }
     /* Kept very faint: a background texture, not a feature */
     .services__field-half--top .services__field-lines,
@@ -154,13 +154,13 @@ import { SERVICES } from '../../content/site-content';
       gap: var(--wb-space-xs);
       min-height: 262px;
       padding: 22px;
-      border: 1px solid rgba(44, 88, 241, 0.14);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid var(--wb-glass-border);
+      border-radius: 8px;
+      background: var(--wb-glass-fill-strong);
       transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
     .card { transition: transform 0.45s var(--wb-ease-out), background-color 0.3s ease, box-shadow 0.45s var(--wb-ease-out); }
-    .card:hover { transform: translateY(-6px); background-color: rgba(255, 255, 255, 0.22); box-shadow: 0 18px 36px rgba(44, 88, 241, 0.12); }
+    .card:hover { transform: translateY(-6px); background-color: rgba(255, 255, 255, 0.22); box-shadow: 0 18px 36px rgba(156, 101, 0, 0.16); }
     .card__title img { transition: transform 0.6s var(--wb-ease-spring); }
     .card:hover .card__title img { transform: rotate(-10deg) scale(1.12); }
     .card__link span { display: inline-block; transition: transform 0.3s var(--wb-ease-out); }
