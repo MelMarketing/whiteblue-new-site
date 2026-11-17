@@ -17,19 +17,19 @@ export type EyebrowIcon =
     :host {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      height: 48px;
-      padding: 10px 24px 10px 20px;
+      gap: 8px;
+      height: 40px;
+      padding: 8px 18px 8px 16px;
       border: 1px solid var(--wb-blue);
       border-radius: 32px;
       background: var(--wb-blue-tint);
       color: var(--wb-blue);
       font-family: var(--wb-font-display);
       font-weight: 700;
-      font-size: var(--wb-fs-button);
+      font-size: clamp(0.875rem, 0.95vw, 1.0625rem);
       white-space: nowrap;
     }
-    img { height: 24px; width: auto; max-width: 32px; flex: none; object-fit: contain; }
+    img { height: 18px; width: auto; max-width: 24px; flex: none; object-fit: contain; }
   `,
 })
 export class PillLabelComponent {
