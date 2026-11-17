@@ -40,7 +40,7 @@
   -webkit-mask-image:
     linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),
     linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%),
-    radial-gradient(ellipse 7.5% 5.4% at 48.5% 16.8%, transparent 0 82%, #000 100%);
+    radial-gradient(ellipse 10.5% 8.5% at 50% 14.5%, transparent 0 82%, #000 100%);
   -webkit-mask-composite: source-in;
   mask-image:
     linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),
@@ -85,7 +85,7 @@
   stroke: var(--wb-blue);
   stroke-width: 1.25px;
   stroke-opacity: 0;
-  stroke-dasharray: 0.0028 0.0048;
+  stroke-dasharray: 3px 10px;
   stroke-dashoffset: 0;
   transition: stroke-opacity 0.9s ease 0.35s;
 }
@@ -124,7 +124,7 @@
 
 :host(.is-playing) .pitch__mark { stroke-dashoffset: 0; }
 :host(.is-playing) .pitch__grass { opacity: 1; }
-:host(.is-playing) .pitch__mark--boundary { stroke-opacity: 0.4; }
+:host(.is-playing) .pitch__mark--boundary { stroke-opacity: 0.5; }
 :host(.is-static) .pitch__mark { transition: none !important; }
 :host(.is-static) .pitch__grass { transition: none !important; }
 
