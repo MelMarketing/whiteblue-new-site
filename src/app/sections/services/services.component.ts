@@ -11,8 +11,7 @@ import { SERVICES } from '../../content/site-content';
   template: `
     <section class="services" id="services" aria-labelledby="services-title">
       <div class="services__grid-lines" aria-hidden="true"></div>
-      <!-- Cricket field (from Figma "fielding_positions"), centred on the boundary with the next
-           section: the top half sits here and the rest carries on into Products. -->
+      <!-- Cricket field graphic, positioned to mirror the right-side reference artwork. -->
       <svg class="services__field" wbReveal="fade" viewBox="0 0 968 968" aria-hidden="true">
         <defs>
           <clipPath id="services-field-top"><rect x="0" y="0" width="968" height="484" /></clipPath>
@@ -21,7 +20,7 @@ import { SERVICES } from '../../content/site-content';
         <!-- One continuous, faint field illustration, contained within the Services section -->
         @for (half of fieldHalves; track half) {
           <g [attr.clip-path]="'url(#services-field-' + half + ')'"
-             [class]="'services__field-half services__field-half--' + half}">
+             [class]="'services__field-half services__field-half--' + half">
             <g class="services__field-lines" fill="none" stroke-width="3.6">
               <circle cx="484" cy="484" r="468" pathLength="1" />
               <circle cx="484" cy="484" r="446.4" pathLength="1" />
@@ -92,13 +91,13 @@ import { SERVICES } from '../../content/site-content';
       right: calc(var(--size) * -0.5 + 52px);
       top: 48.5%;
       bottom: auto;
+      translate: 0 -50%;
       width: var(--size);
       height: var(--size);
       max-width: none;
       overflow: visible;
       pointer-events: none;
       z-index: 0;
-      transform: translateY(-50%);
       transform-origin: center;
     }
     .services__field-half--top,
@@ -168,8 +167,6 @@ import { SERVICES } from '../../content/site-content';
     .card:hover .card__title img { transform: rotate(-10deg) scale(1.12); }
     .card__link span { display: inline-block; transition: transform 0.3s var(--wb-ease-out); }
     .card:hover .card__link span { transform: translateX(6px); }
-    .services__grid-lines { animation: wb-grid-drift 30s linear infinite; }
-    .services__field { transform-origin: center; }
     .card__title {
       display: flex;
       align-items: center;
@@ -220,7 +217,7 @@ import { SERVICES } from '../../content/site-content';
 export class ServicesComponent {
   protected readonly services = SERVICES;
   protected readonly fieldHalves = ['top', 'bottom'] as const;
-  /** Fielder positions on the field (viewBox units); the first four are from Figma. */
+  /** Fielder positions in SVG viewBox units, aligned to the supplied section reference. */
   protected readonly fielders = [
     { x: 314, y: 527 },
     { x: 354, y: 482 },
