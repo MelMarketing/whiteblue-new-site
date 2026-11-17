@@ -88,10 +88,10 @@ import { SERVICES } from '../../content/site-content';
     }
     /* The cricket field is centred on the right edge and vertically within Services. */
     .services__field {
-      --size: clamp(680px, 70vw, 968px);
+      --size: min(968px, 94svh);
       position: absolute;
-      right: calc(var(--size) * -0.5 - 48px);
-      top: 56%;
+      right: calc(var(--size) * -0.5);
+      top: 50%;
       bottom: auto;
       translate: 0 -50%;
       width: var(--size);
@@ -157,7 +157,7 @@ import { SERVICES } from '../../content/site-content';
       flex-direction: column;
       gap: 12px;
       min-height: clamp(190px, 20vh, 228px);
-      padding: 20px;
+      padding: 20px 22px 28px;
       border: 1px solid rgba(255, 255, 255, 0.7);
       border-radius: 8px;
       background: #ffe892;
@@ -208,9 +208,9 @@ import { SERVICES } from '../../content/site-content';
       }
       .services__cards { margin-top: 22px; gap: 14px; }
       .card {
-        height: 152px;
-        min-height: 152px;
-        padding: 14px;
+        height: auto;
+        min-height: 184px;
+        padding: 18px 22px 28px;
         gap: 7px;
       }
       .card__title { font-size: 1.55rem; line-height: 1.2; gap: 9px; }
