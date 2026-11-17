@@ -17,27 +17,18 @@ import { SERVICES } from '../../content/site-content';
         <defs>
           <clipPath id="services-field-top"><rect x="0" y="0" width="968" height="484" /></clipPath>
           <clipPath id="services-field-bottom"><rect x="0" y="484" width="968" height="484" /></clipPath>
-          <!-- The part inside Products fades out before it reaches the copy there -->
-          <linearGradient id="services-field-fade" x1="0" y1="484" x2="0" y2="700" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#fff" />
-            <stop offset="1" stop-color="#000" />
-          </linearGradient>
-          <mask id="services-field-bottom-fade" maskUnits="userSpaceOnUse" x="0" y="0" width="968" height="968">
-            <rect x="0" y="0" width="968" height="968" fill="url(#services-field-fade)" />
-          </mask>
         </defs>
-        <!-- Same field drawn twice: white on this section, blue where it runs into Products -->
+        <!-- One continuous, faint field illustration, contained within the Services section -->
         @for (half of fieldHalves; track half) {
           <g [attr.clip-path]="'url(#services-field-' + half + ')'"
-             [attr.mask]="half === 'bottom' ? 'url(#services-field-bottom-fade)' : null"
-             [class]="'services__field-half services__field-half--' + half">
+             [class]="'services__field-half services__field-half--' + half}">
             <g class="services__field-lines" fill="none" stroke-width="3.6">
               <circle cx="484" cy="484" r="468" pathLength="1" />
               <circle cx="484" cy="484" r="446.4" pathLength="1" />
               <circle cx="484" cy="484" r="251.4" pathLength="1" />
-              <rect x="449.3" y="404.4" width="69.5" height="122.5" pathLength="1" />
-              <path d="M416.6 424.8H551.5" pathLength="1" />
-              <path d="M416.6 506.5H551.5" pathLength="1" />
+              <rect x="399.3" y="412" width="69.5" height="132.5" pathLength="1" />
+              <path d="M366.6 424.8H501.5" pathLength="1" />
+              <path d="M366.6 506.5H501.5" pathLength="1" />
             </g>
             <g class="services__field-fielders" fill="none" stroke-width="3.6">
               @for (f of fielders; track $index) {
@@ -50,7 +41,7 @@ import { SERVICES } from '../../content/site-content';
 
       <div class="wb-container services__inner">
         <wb-pill-label wbReveal icon="services" class="services__eyebrow">Services</wb-pill-label>
-        <h2 wbReveal class="wb-h2" id="services-title">From playbook to <span class="wb-accent">production</span></h2>
+        <h2 wbReveal class="wb-h2 services__title" id="services-title">From playbook to <span class="wb-accent">production</span></h2>
         <p wbReveal [wbRevealDelay]="120" class="wb-lead services__lead">
           We bring the same deep-tech disciplines to every industry, shaped around how each one actually works.
         </p>
@@ -74,43 +65,49 @@ import { SERVICES } from '../../content/site-content';
     :host { display: block; }
     .services {
       position: relative;
-      overflow: visible; /* the field carries on into the next section */
-      padding: var(--wb-section-y) 0;
+      display: flex;
+      align-items: center;
+      min-height: 100svh;
+      overflow: hidden;
+      isolation: isolate;
+      padding: clamp(30px, 4vh, 48px) 0;
       background: transparent;
     }
     /* ~99px hairline grid in white, Figma "lines" group */
     .services__grid-lines {
       position: absolute;
-      inset: 0 0 auto;
-      height: min(945px, 100%); /* stay inside the section now it no longer clips */
+      inset: 0;
       pointer-events: none;
       background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.35) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 1px, transparent 1px);
-      background-size: 98.77px 100px;
-      background-position: calc(50% - 900.7px) 0, 0 0;
-      mask-image: linear-gradient(to bottom, #000 75%, transparent);
+      background-size: 92px 92px;
+      background-position: 46px 0, 0 1px;
+      mask-image: linear-gradient(to bottom, #000 82%, transparent);
     }
-    /* Centre of the field sits exactly on the bottom edge of this section */
+    /* The cricket field is centred on the right edge and vertically within Services. */
     .services__field {
-      --size: clamp(420px, 46vw, 880px);
+      --size: clamp(680px, 70vw, 968px);
       position: absolute;
-      right: calc(var(--size) * -0.12);
-      bottom: calc(var(--size) * -0.5);
+      right: calc(var(--size) * -0.5 + 52px);
+      top: 48.5%;
+      bottom: auto;
       width: var(--size);
       height: var(--size);
       max-width: none;
       overflow: visible;
       pointer-events: none;
       z-index: 0;
+      transform: translateY(-50%);
+      transform-origin: center;
     }
-    .services__field-half--top { stroke: #fff; }
-    .services__field-half--bottom { stroke: var(--wb-blue); }
-    /* Kept very faint: a background texture, not a feature */
+    .services__field-half--top,
+    .services__field-half--bottom { stroke: #fff; }
+    /* Faint field lines sit behind the service copy and cards. */
     .services__field-half--top .services__field-lines,
-    .services__field-half--top .services__field-fielders { opacity: 0.28; }
+    .services__field-half--top .services__field-fielders,
     .services__field-half--bottom .services__field-lines,
-    .services__field-half--bottom .services__field-fielders { opacity: 0.1; }
+    .services__field-half--bottom .services__field-fielders { opacity: 0.38; }
     .services__field-lines > * {
       stroke-opacity: 0.95;
       stroke-dasharray: 1;
@@ -139,21 +136,27 @@ import { SERVICES } from '../../content/site-content';
     .services__field-fielders circle:nth-child(n + 8) { transition-delay: 1.5s; }
     .services__inner { position: relative; z-index: 1; }
     .services__eyebrow { margin-bottom: var(--wb-space-xs); }
-    .services__lead { margin-top: var(--wb-space-sm); max-width: 951px; }
+    .services__title {
+      max-width: 720px;
+      font-size: clamp(2.7rem, 5vw, 4.5rem);
+      line-height: 1.2;
+    }
+    .services__lead { margin-top: var(--wb-space-sm); max-width: 900px; }
 
     .services__cards {
-      margin-top: var(--wb-space-lg);
+      max-width: 964px;
+      margin-top: clamp(24px, 3vh, 36px);
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 582px));
-      gap: var(--wb-gap-cards);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
     }
 
     .card {
       display: flex;
       flex-direction: column;
-      gap: var(--wb-space-xs);
-      min-height: 262px;
-      padding: 22px;
+      gap: 12px;
+      min-height: clamp(190px, 20vh, 228px);
+      padding: 20px;
       border: 1px solid var(--wb-glass-border);
       border-radius: 8px;
       background: var(--wb-glass-fill-strong);
@@ -166,7 +169,7 @@ import { SERVICES } from '../../content/site-content';
     .card__link span { display: inline-block; transition: transform 0.3s var(--wb-ease-out); }
     .card:hover .card__link span { transform: translateX(6px); }
     .services__grid-lines { animation: wb-grid-drift 30s linear infinite; }
-    .services__field { transform-origin: 100% 100%; }
+    .services__field { transform-origin: center; }
     .card__title {
       display: flex;
       align-items: center;
@@ -186,12 +189,30 @@ import { SERVICES } from '../../content/site-content';
     }
     .card__link { margin-top: auto; }
 
+    @media (max-height: 850px) and (min-width: 761px) {
+      .services { padding-block: 24px; }
+      .services__title { font-size: clamp(2.2rem, 4vw, 3.4rem); }
+      .services__lead { margin-top: 16px; }
+      .services__cards { margin-top: 22px; gap: 16px; }
+      .card { min-height: 180px; padding: 16px; }
+      .card__title { font-size: clamp(1.25rem, 1.8vw, 1.6rem); }
+    }
     @media (max-width: 1100px) {
-      .services__cards { grid-template-columns: 1fr 1fr; }
       .services__field { opacity: 0.8; }
     }
     @media (max-width: 760px) {
-      .services__cards { grid-template-columns: 1fr; }
+      .services {
+        display: block;
+        min-height: 0;
+        padding-block: var(--wb-section-y);
+      }
+      .services__field {
+        --size: 640px;
+        right: -320px;
+        top: 42%;
+        opacity: 0.28;
+      }
+      .services__cards { max-width: none; grid-template-columns: 1fr; }
       .card { min-height: 0; }
     }
   `,
@@ -201,8 +222,9 @@ export class ServicesComponent {
   protected readonly fieldHalves = ['top', 'bottom'] as const;
   /** Fielder positions on the field (viewBox units); the first four are from Figma. */
   protected readonly fielders = [
-    { x: 247, y: 157 }, { x: 437, y: 312 }, { x: 482, y: 351 }, { x: 294, y: 404 },
-    { x: 721, y: 157 }, { x: 531, y: 312 }, { x: 674, y: 404 },
-    { x: 400, y: 640 }, { x: 612, y: 700 }, { x: 250, y: 800 }, { x: 760, y: 760 },
+    { x: 314, y: 527 },
+    { x: 354, y: 482 },
+    { x: 160, y: 697 },
+    { x: 406, y: 652 },
   ];
 }
