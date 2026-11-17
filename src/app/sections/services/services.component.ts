@@ -25,9 +25,11 @@ import { SERVICES } from '../../content/site-content';
               <circle cx="484" cy="484" r="468" pathLength="1" />
               <circle cx="484" cy="484" r="446.4" pathLength="1" />
               <circle cx="484" cy="484" r="251.4" pathLength="1" />
-              <rect x="399.3" y="412" width="69.5" height="132.5" pathLength="1" />
-              <path d="M366.6 424.8H501.5" pathLength="1" />
-              <path d="M366.6 506.5H501.5" pathLength="1" />
+              <g transform="rotate(90 434 478)">
+                <rect x="399.3" y="412" width="69.5" height="132.5" pathLength="1" />
+                <path d="M366.6 424.8H501.5" pathLength="1" />
+                <path d="M366.6 506.5H501.5" pathLength="1" />
+              </g>
             </g>
             <g class="services__field-fielders" fill="none" stroke-width="3.6">
               @for (f of fielders; track $index) {
@@ -40,7 +42,7 @@ import { SERVICES } from '../../content/site-content';
 
       <div class="wb-container services__inner">
         <wb-pill-label wbReveal icon="services" class="services__eyebrow">Services</wb-pill-label>
-        <h2 wbReveal class="wb-h2 services__title" id="services-title">From playbook to <span class="wb-accent">production</span></h2>
+        <h2 wbReveal class="wb-h2 services__title" id="services-title">From playbook to production</h2>
         <p wbReveal [wbRevealDelay]="120" class="wb-lead services__lead">
           We bring the same deep-tech disciplines to every industry, shaped around how each one actually works.
         </p>
@@ -156,9 +158,9 @@ import { SERVICES } from '../../content/site-content';
       gap: 12px;
       min-height: clamp(190px, 20vh, 228px);
       padding: 20px;
-      border: 1px solid var(--wb-glass-border);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       border-radius: 8px;
-      background: var(--wb-glass-fill-strong);
+      background: #ffe892;
       transition: background-color 0.2s ease, box-shadow 0.2s ease;
     }
     .card { transition: transform 0.45s var(--wb-ease-out), background-color 0.3s ease, box-shadow 0.45s var(--wb-ease-out); }
@@ -187,12 +189,33 @@ import { SERVICES } from '../../content/site-content';
     .card__link { margin-top: auto; }
 
     @media (max-height: 850px) and (min-width: 761px) {
-      .services { padding-block: 24px; }
-      .services__title { font-size: clamp(2.2rem, 4vw, 3.4rem); }
-      .services__lead { margin-top: 16px; }
-      .services__cards { margin-top: 22px; gap: 16px; }
-      .card { min-height: 180px; padding: 16px; }
-      .card__title { font-size: clamp(1.25rem, 1.8vw, 1.6rem); }
+      .services {
+        height: 100svh;
+        min-height: 0;
+        padding-block: 20px;
+      }
+      .services__title {
+        max-width: 720px;
+        font-size: clamp(2.15rem, 3.6vw, 3.2rem);
+        line-height: 1.12;
+      }
+      .services__lead {
+        max-width: 820px;
+        margin-top: 12px;
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+      .services__cards { margin-top: 18px; gap: 14px; }
+      .card {
+        height: 168px;
+        min-height: 168px;
+        padding: 14px;
+        gap: 7px;
+      }
+      .card__title { font-size: 1.45rem; line-height: 1.2; gap: 9px; }
+      .card__title img { width: 30px; height: 30px; object-fit: contain; }
+      .card__text { font-size: 1rem; line-height: 1.38; }
+      .card__link { font-size: 1rem; }
     }
     @media (max-width: 1100px) {
       .services__field { opacity: 0.8; }
@@ -220,8 +243,8 @@ export class ServicesComponent {
   /** Fielder positions in SVG viewBox units, aligned to the supplied section reference. */
   protected readonly fielders = [
     { x: 314, y: 527 },
-    { x: 354, y: 482 },
-    { x: 160, y: 697 },
-    { x: 406, y: 652 },
+    { x: 354, y: 568 },
+    { x: 160, y: 718 },
+    { x: 406, y: 673 },
   ];
 }
