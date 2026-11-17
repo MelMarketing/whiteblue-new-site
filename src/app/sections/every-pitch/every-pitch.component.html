@@ -44,7 +44,7 @@
             </pattern>
             <mask id="pitch-grass-annulus" maskUnits="userSpaceOnUse" x="-2400" y="-2400" width="4800" height="4800">
               <rect x="-2400" y="-2400" width="4800" height="4800" fill="#000" />
-              <circle cx="16" cy="78" r="1950" fill="#fff" />
+              <circle cx="16" cy="78" r="1200" fill="#fff" />
               <circle cx="16" cy="78" r="650" fill="#000" />
             </mask>
             <!-- Keeps the ground markings off the pitch strip and its labels. -->
@@ -63,14 +63,10 @@
               <circle class="pitch__mark pitch__mark--30-yard" cx="16" cy="78" r="650"
                       pathLength="1" vector-effect="non-scaling-stroke" />
               <!-- A lighter dotted circle represents the outer boundary. -->
-              <circle class="pitch__mark pitch__mark--boundary" cx="16" cy="78" r="1950"
-                      pathLength="1" vector-effect="non-scaling-stroke" />
+              <circle class="pitch__mark pitch__mark--boundary" cx="16" cy="78" r="1200"
+                      vector-effect="non-scaling-stroke" />
             </g>
-            <!-- Creases sit close to each set of stumps and extend only slightly beyond the pitch edges. -->
-            <line class="pitch__mark pitch__mark--crease" x1="851" y1="126" x2="515" y2="370" pathLength="1"
-                  vector-effect="non-scaling-stroke" style="transition-delay: 300ms" />
-            <line class="pitch__mark pitch__mark--crease" x1="1289" y1="732" x2="953" y2="976" pathLength="1"
-                  vector-effect="non-scaling-stroke" style="transition-delay: 420ms" />
+
           </g>
 
           <!-- Legacy core callout: the stem terminates on the pitch, not on the stumps. -->
