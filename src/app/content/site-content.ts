@@ -226,6 +226,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
 export const SOCIAL_LINKS = [
   { label: 'LinkedIn', icon: 'assets/icons/linkedin.svg', href: '#' },
   { label: 'Instagram', icon: 'assets/icons/instagram.svg', href: '#' },
+  { label: 'Facebook', icon: 'assets/icons/facebook.svg', href: '#' },
   { label: 'YouTube', icon: 'assets/icons/youtube.svg', href: '#' },
   // X is switched off for now; uncomment to show it again.
   // { label: 'X (Twitter)', icon: 'assets/icons/x.svg', href: '#' },
