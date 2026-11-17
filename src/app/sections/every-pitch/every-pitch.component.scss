@@ -39,7 +39,7 @@
   /* Soft edges so the video's background melts into the page colour while it changes */
   -webkit-mask-image:
     linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),
-    linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
   -webkit-mask-composite: source-in;
   mask-image:
     linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%),
