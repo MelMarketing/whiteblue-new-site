@@ -8,22 +8,25 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 @Component({
   selector: 'wb-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<a class="btn" [class.btn--light]="variant() === 'light'" [attr.href]="href()"><ng-content /></a>`,
+  template: `<a class="btn wb-cta-shine" [class.btn--light]="variant() === 'light'" [attr.href]="href()"><ng-content /></a>`,
   styles: `
     :host { display: inline-flex; }
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: var(--wb-button-padding, 12px 24px);
+      min-width: 180px;
+      height: 44px;
+      min-height: 44px;
+      padding: 0 20px;
       border-radius: var(--wb-radius-pill);
       border: 1px solid var(--wb-amber);
       background: var(--wb-blue);
       color: var(--wb-white);
       font-family: var(--wb-font-display);
       font-weight: 700;
-      font-size: var(--wb-button-font-size, var(--wb-fs-button));
-      line-height: 1.35;
+      font-size: clamp(1rem, 1.05vw, 1.125rem);
+      line-height: 1;
       white-space: nowrap;
       transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     }
