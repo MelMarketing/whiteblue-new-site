@@ -38,7 +38,16 @@
             <filter id="pitch-field-feather" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="34" />
             </filter>
-            <!-- Keeps the markings off the pitch strip and its labels -->
+            <!-- Subtle mowing bands, clipped to the grass between the 30-yard circle and boundary. -->
+            <pattern id="pitch-grass-stripes" width="32" height="32" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+              <rect width="16" height="32" fill="#2c58f1" fill-opacity="0.035" />
+            </pattern>
+            <mask id="pitch-grass-annulus" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="2000" height="2130">
+              <rect x="-1000" y="-1000" width="2000" height="2130" fill="#000" />
+              <circle cx="0" cy="65" r="930" fill="#fff" />
+              <circle cx="0" cy="65" r="650" fill="#000" />
+            </mask>
+            <!-- Keeps the ground markings off the pitch strip and its labels. -->
             <mask id="pitch-field-mask" maskUnits="userSpaceOnUse" x="-576" y="-448" width="2592" height="2016">
               <rect x="-576" y="-448" width="2592" height="2016" fill="#fff" />
               <polygon points="427.9,215.4 1072.5,1106.5 1376.2,886.7 731.6,-4.3" fill="#000" filter="url(#pitch-field-feather)" />
@@ -47,14 +56,15 @@
 
           <g mask="url(#pitch-field-mask)">
             <g transform="matrix(0.586 0.810 0.939 -0.343 869 612)">
-              @for (ring of rings; track ring.r; let i = $index) {
-                <circle class="pitch__mark" [class.pitch__mark--dashed]="ring.dashed" cx="0" cy="0" [attr.r]="ring.r"
-                        pathLength="1" vector-effect="non-scaling-stroke" [style.transition-delay.ms]="i * 140" />
-              }
-              @for (s of spokes; track $index; let i = $index) {
-                <line class="pitch__mark pitch__mark--spoke" [attr.x1]="s.x1" [attr.y1]="s.y1" [attr.x2]="s.x2" [attr.y2]="s.y2"
-                      pathLength="1" vector-effect="non-scaling-stroke" [style.transition-delay.ms]="500 + i * 90" />
-              }
+              <!-- Alternating, very subtle grass-cutting stripes in the outer field. -->
+              <rect class="pitch__grass" x="-1000" y="-1000" width="2000" height="2130"
+                    fill="url(#pitch-grass-stripes)" mask="url(#pitch-grass-annulus)" />
+              <!-- The solid inner circle marks the 30-yard fielding circle. -->
+              <circle class="pitch__mark pitch__mark--30-yard" cx="0" cy="65" r="650"
+                      pathLength="1" vector-effect="non-scaling-stroke" />
+              <!-- A lighter dotted circle represents the outer boundary. -->
+              <circle class="pitch__mark pitch__mark--boundary" cx="0" cy="65" r="930"
+                      pathLength="1" vector-effect="non-scaling-stroke" />
             </g>
             <!-- Popping and bowling creases, extended across the field towards the copy -->
             <line class="pitch__mark pitch__mark--crease" x1="775" y1="362" x2="40" y2="630" pathLength="1"
