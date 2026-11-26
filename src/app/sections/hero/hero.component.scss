@@ -23,164 +23,8 @@
   mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 92%);
 }
 
-/* ---------- Nav ---------- */
-.nav-wrap {
-  position: relative;
-  z-index: 100;
-  height: 74px; /* holds the nav's space in the page while the nav itself is fixed */
-}
-
-/* While scrolling: a full-width fade behind the nav, solid at the top of the window and
-   transparent just below the nav, so content scrolling up disappears under it.
-   Uses the current page colour (white for most sections) so it blends in. */
-.nav-wrap::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 110px;
-  background: linear-gradient(
-    to bottom,
-    var(--wb-page-bg, #fff) 0%,
-    var(--wb-page-bg, #fff) 55%,
-    color-mix(in srgb, var(--wb-page-bg, #fff) 0%, transparent) 100%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-}
-.nav-wrap--scrolled::before { opacity: 1; }
-
-/* Sticky: the nav stays pinned 32px from the top of the window while scrolling */
-.nav {
-  position: fixed;
-  top: 32px;
-  left: 50%;
-  translate: -50% 0; /* separate from transform, which the entrance animation uses */
-  width: min(var(--wb-container), 100% - 2 * var(--wb-gutter));
-  transition: background 0.3s ease, box-shadow 0.3s ease, top 0.35s ease, width 0.35s ease,
-    min-height 0.35s ease, padding 0.35s ease;
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  min-height: 74px;
-  padding: 11px 22px;
-  border: 1px solid var(--wb-glass-border);
-  border-radius: 70px;
-  background: var(--wb-glass-fill);
-  backdrop-filter: blur(10px);
-}
-
-/* Once the page scrolls off the blue hero, the white links need a solid blue backing */
-.nav--scrolled {
-  background: rgba(44, 88, 241, 0.92);
-  box-shadow: 0 10px 30px rgba(11, 21, 51, 0.18);
-}
-
-/* Condensed while scrolling: closer to the top, shorter, narrower, smaller contents */
-.nav--scrolled {
-  top: 12px;
-  width: min(1040px, 100% - 2 * var(--wb-gutter));
-  min-height: 56px;
-  padding: 6px 8px 6px 20px;
-}
-.nav__logo img { transition: width 0.35s ease; }
-.nav--scrolled .nav__logo img { width: clamp(120px, 7.5vw, 140px); }
-.nav__links { transition: font-size 0.35s ease; }
-.nav--scrolled .nav__links { font-size: clamp(0.9375rem, 0.95vw, 1.0625rem); }
-.nav--scrolled .nav__cta { --wb-fs-button: clamp(0.9375rem, 0.9vw, 1.0625rem); --wb-btn-pad: 8px 20px; }
-.nav--scrolled .nav__toggle { width: 42px; height: 42px; }
-
-.nav__logo { flex: none; margin-right: auto; }
-.nav__logo img { width: clamp(140px, 10vw, 192px); height: auto; }
-
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  font-family: var(--wb-font-display);
-  font-weight: 500;
-  font-size: var(--wb-fs-nav);
-  color: var(--wb-white);
-  white-space: nowrap;
-
-  a {
-    position: relative;
-    padding-block: 4px;
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      height: 2px;
-      background: currentColor;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.2s ease;
-    }
-    &:hover::after, &:focus-visible::after { transform: scaleX(1); }
-  }
-}
-
-.nav__menu-cta { display: none; }
-.nav__cta { flex: none; --wb-fs-button: clamp(1rem, 1.04vw, 1.25rem); }
-
-/* Desktop: links centered in the bar, logo left, CTA right */
-@media (min-width: 1281px) {
-  .nav {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-  }
-  .nav__logo { margin-right: 0; justify-self: start; }
-  .nav__cta { justify-self: end; }
-}
-
-.nav__toggle {
-  display: none;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-.nav__toggle-bar {
-  width: 20px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--wb-white);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-.nav__toggle[aria-expanded='true'] .nav__toggle-bar:nth-child(2) { transform: translateY(7px) rotate(45deg); }
-.nav__toggle[aria-expanded='true'] .nav__toggle-bar:nth-child(3) { opacity: 0; }
-.nav__toggle[aria-expanded='true'] .nav__toggle-bar:nth-child(4) { transform: translateY(-7px) rotate(-45deg); }
-
-@media (max-width: 1280px) {
-  .nav__toggle { display: inline-flex; }
-  .nav__cta { display: none; }
-  .nav__links {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 4px;
-    padding: 16px;
-    border-radius: 24px;
-    background: var(--wb-blue-deep);
-    box-shadow: 0 20px 40px rgba(11, 21, 51, 0.25);
-
-    a { display: block; padding: 12px 14px; border-radius: 12px; }
-    a:hover { background: rgba(255, 255, 255, 0.1); }
-    a::after { display: none; }
-  }
-  .nav__links--open { display: flex; }
-  .nav__menu-cta { display: block; padding: 8px 6px 4px; }
-}
+/* Space for the fixed site navigation (see shared/site-header.component) */
+.hero__nav-space { height: 74px; }
 
 /* ---------- Hero statement ---------- */
 .hero__content {
@@ -292,7 +136,6 @@
 
 /* ---------- Motion: one orchestrated load sequence ---------- */
 .hero__grid { animation: wb-grid-drift 24s linear infinite; }
-.nav { animation: wb-drop 0.8s var(--wb-ease-out) both; }
 .hero__badge { animation: wb-rise 0.8s var(--wb-ease-out) 0.15s both; }
 .hero__title { animation: wb-rise 1s var(--wb-ease-out) 0.3s both; }
 .hero__lead { animation: wb-rise 1s var(--wb-ease-out) 0.5s both; }
@@ -305,7 +148,6 @@
 .clients__logo img { transition: filter 0.3s ease; }
 .clients__logo:hover img { filter: none; }
 
-.nav__links--open { animation: wb-drop 0.35s var(--wb-ease-out) both; }
 
 @media (max-width: 1100px) {
   .clients__logos { justify-content: center; gap: 20px 56px; }

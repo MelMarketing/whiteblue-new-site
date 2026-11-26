@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostListener, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ButtonComponent } from '../../shared/button.component';
-import { CLIENT_LOGOS, CONSULTATION_HREF, NAV_LINKS } from '../../content/site-content';
+import { CLIENT_LOGOS, CONSULTATION_HREF } from '../../content/site-content';
 
-/** Figma "header" (805:60723): floating glass nav, hero statement and client logos. */
+/** Figma "header" (805:60723): hero statement and client logos (the nav is in shared/site-header). */
 @Component({
   selector: 'wb-hero',
   imports: [ButtonComponent],
@@ -11,27 +11,6 @@ import { CLIENT_LOGOS, CONSULTATION_HREF, NAV_LINKS } from '../../content/site-c
   styleUrl: './hero.component.scss',
 })
 export class HeroComponent {
-  protected readonly navLinks = NAV_LINKS;
   protected readonly clientLogos = CLIENT_LOGOS;
   protected readonly consultationHref = CONSULTATION_HREF;
-  protected readonly menuOpen = signal(false);
-  protected readonly scrolled = signal(false);
-
-  @HostListener('window:scroll')
-  protected onScroll(): void {
-    this.scrolled.set(window.scrollY > 40);
-  }
-
-  protected toggleMenu(): void {
-    this.menuOpen.update(open => !open);
-  }
-
-  protected closeMenu(): void {
-    this.menuOpen.set(false);
-  }
-
-  @HostListener('document:keydown.escape')
-  protected onEscape(): void {
-    this.closeMenu();
-  }
 }

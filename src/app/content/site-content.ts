@@ -5,13 +5,56 @@
  */
 
 export interface NavLink { label: string; href: string; }
+/** A top-level menu item; `children` appear as a drop-down on hover/focus (and indented on mobile). */
+export interface NavItem extends NavLink { children?: NavLink[]; }
 
-export const NAV_LINKS: NavLink[] = [
-  { label: 'Products', href: '#products' },
-  { label: 'Services', href: '#services' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Insights', href: '#case-studies' },
-  { label: 'Company', href: '#founder' },
+/** Service detail pages (see app.routes.ts) */
+export const AGENTIC_AI_HREF = '/services/agentic-ai';
+export const INFRA_AUTOMATION_HREF = '/services/infra-automation';
+export const DATA_MODERNIZATION_HREF = '/services/data-modernization';
+export const API_SERVICES_HREF = '/services/api-services';
+export const INSURELIV_HREF = '/products/insureliv';
+export const DOBBY_HREF = '/products/dobby';
+export const QUICKQODE_HREF = '/products/quickqode';
+export const FIELDZAPP_HREF = '/products/fieldzapp';
+
+/**
+ * Header menu. Add each new page to the right parent's `children` (Products, Services, …).
+ * A parent with no children is a plain link.
+ */
+export const NAV_LINKS: NavItem[] = [
+  {
+    label: 'Products',
+    href: '/#products',
+    children: [
+      { label: 'InsureLiv', href: INSURELIV_HREF },
+      { label: 'Dobby', href: DOBBY_HREF },
+      { label: 'QuickQode', href: QUICKQODE_HREF },
+      { label: 'FieldZapp', href: FIELDZAPP_HREF },
+    ],
+  },
+  {
+    label: 'Services',
+    href: '/#services',
+    children: [
+      { label: 'API services', href: API_SERVICES_HREF },
+      { label: 'Data modernization', href: DATA_MODERNIZATION_HREF },
+      { label: 'Infra automation', href: INFRA_AUTOMATION_HREF },
+      { label: 'Agentic AI', href: AGENTIC_AI_HREF },
+    ],
+  },
+  { label: 'Industries', href: '/#industries' },
+  { label: 'Insights', href: '/#case-studies' },
+  {
+    label: 'Company',
+    href: '/company/purpose-leadership',
+    children: [
+      { label: 'Purpose & leadership', href: '/company/purpose-leadership' },
+      { label: 'WhiteBlue framework', href: '/company/framework' },
+      { label: 'Social initiative', href: '/company/social-initiative' },
+      { label: 'Global presence', href: '/company/global-presence' },
+    ],
+  },
   { label: 'Careers', href: '#' },
 ];
 
@@ -84,7 +127,7 @@ export const SERVICES: Service[] = [
     linkLabel: 'Explore API services',
     icon: 'assets/icons/api.svg',
     iconSize: 42,
-    href: '#',
+    href: API_SERVICES_HREF,
   },
   {
     title: 'Data Modernization',
@@ -92,7 +135,7 @@ export const SERVICES: Service[] = [
     linkLabel: 'Explore data modernization',
     icon: 'assets/icons/data.svg',
     iconSize: 42,
-    href: '#',
+    href: DATA_MODERNIZATION_HREF,
   },
   {
     title: 'Infra Automation',
@@ -100,7 +143,7 @@ export const SERVICES: Service[] = [
     linkLabel: 'Explore infra automation',
     icon: 'assets/icons/automation.svg',
     iconSize: 42,
-    href: '#',
+    href: INFRA_AUTOMATION_HREF,
   },
   {
     title: 'Agentic AI',
@@ -109,7 +152,7 @@ export const SERVICES: Service[] = [
     linkLabel: 'Explore agentic AI',
     icon: 'assets/icons/agentic.svg',
     iconSize: 36,
-    href: '#',
+    href: AGENTIC_AI_HREF,
   },
 ];
 
@@ -144,7 +187,7 @@ export const PRODUCTS: Product[] = [
     tagline: 'Automate tasks with AI.',
     summary: 'Automate tasks with AI.',
     ctaLabel: 'Learn about Dobby',
-    href: '#',
+    href: DOBBY_HREF,
     image: 'assets/img/product-dobby.webp',
     logo: 'assets/img/logo-dobby.png',
     gradient: 'linear-gradient(89.66deg, #6ec8d7 4.97%, #2e43cf 104.55%)',
@@ -154,7 +197,7 @@ export const PRODUCTS: Product[] = [
     tagline: 'Build, test, and deploy code faster.',
     summary: 'Build, test, and deploy code faster.',
     ctaLabel: 'Learn about QuickQode',
-    href: '#',
+    href: QUICKQODE_HREF,
     image: 'assets/img/product-quickqode.webp',
     logo: 'assets/img/logo-quickqode.png',
     gradient: 'linear-gradient(90deg, #7170d5 0%, #74409e 66.07%)',
@@ -164,7 +207,7 @@ export const PRODUCTS: Product[] = [
     tagline: 'Streamline field operations and team management.',
     summary: 'Streamline field operations and team management.',
     ctaLabel: 'Learn about FieldZapp',
-    href: '#',
+    href: FIELDZAPP_HREF,
     image: 'assets/img/product-fieldzapp.webp',
     logo: 'assets/img/logo-fieldzapp.png',
     gradient: 'linear-gradient(90deg, #ac5a84 0%, #843b8c 66.07%)',
@@ -218,9 +261,28 @@ export const FOUNDER_NOTE = {
 
 export interface FooterColumn { heading: string; links: NavLink[]; }
 export const FOOTER_COLUMNS: FooterColumn[] = [
-  { heading: 'Products', links: ['InsureLiv', 'Dobby', 'Quickqode', 'FieldZapp'].map(label => ({ label, href: '#products' })) },
-  { heading: 'Services', links: ['API Services', 'Data Modernization', 'Infra Automation', 'Agentic AI'].map(label => ({ label, href: '#services' })) },
-  { heading: 'Company', links: ['About Us', 'Leadership', 'News & Insights', 'Careers'].map(label => ({ label, href: '#' })) },
+  { heading: 'Products', links: [{ label: 'InsureLiv', href: INSURELIV_HREF }, { label: 'Dobby', href: DOBBY_HREF }, { label: 'Quickqode', href: QUICKQODE_HREF }, { label: 'FieldZapp', href: FIELDZAPP_HREF }] },
+  {
+    heading: 'Services',
+    links: [
+      { label: 'API Services', href: API_SERVICES_HREF },
+      { label: 'Data Modernization', href: DATA_MODERNIZATION_HREF },
+      { label: 'Infra Automation', href: INFRA_AUTOMATION_HREF },
+      { label: 'Agentic AI', href: AGENTIC_AI_HREF },
+    ],
+  },
+  {
+    heading: 'Company',
+    links: [
+      { label: 'About Us', href: '/company/purpose-leadership' },
+      { label: 'Leadership', href: '/company/purpose-leadership#leadership' },
+      { label: 'Framework', href: '/company/framework' },
+      { label: 'Social Initiative', href: '/company/social-initiative' },
+      { label: 'Global Presence', href: '/company/global-presence' },
+      { label: 'News & Insights', href: '#' },
+      { label: 'Careers', href: '#' },
+    ],
+  },
 ];
 
 export const SOCIAL_LINKS = [

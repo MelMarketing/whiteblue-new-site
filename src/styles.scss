@@ -55,6 +55,12 @@
   --wb-container: 1660px;
   --wb-section-y: clamp(64px, 6.25vw, 120px);   /* top and bottom padding of every section */
 
+  /* One-screen rule (new pages from Infra automation on): every section fits within one viewport height.
+     These scale with the screen height as well as the width, so short laptop screens stay on one screen. */
+  --wb-fit-y: clamp(44px, min(6.25vw, 9svh), 120px);      /* section top/bottom padding */
+  --wb-fit-h2: min(clamp(2.25rem, 4.06vw, 4.875rem), 8.2svh); /* section heading size */
+  --wb-fit-gap: clamp(24px, min(2.9vw, 4.5svh), 56px);     /* heading -> section content */
+
   /* Spacing scale: every gap on the site uses one of these */
   --wb-space-2xs: 8px;
   --wb-space-xs: 16px;                          /* section pill -> heading, inside cards */
@@ -88,7 +94,7 @@ body {
   background-color: var(--wb-page-bg, #fff);
   transition: background-color 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip; /* not "hidden": that makes <body> a scroll container and breaks position: sticky */
 }
 
 img, svg { display: block; max-width: 100%; }
@@ -105,6 +111,15 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 /* Section headings: Satoshi Bold 78/92 with a blue lead-in phrase */
+/* Pages that follow the one-screen rule put this class on their page host: shared components
+   (section head, CTA panel, impact rows) then pick up the screen-height-aware sizes too. */
+.wb-fit {
+  --wb-section-y: var(--wb-fit-y);
+  --wb-fs-h2: var(--wb-fit-h2);
+  --wb-space-lg: var(--wb-fit-gap);
+}
+.wb-fit .wb-h2 { text-wrap: balance; } /* no single word left alone on the last line */
+
 .wb-h2 {
   font-family: var(--wb-font-display);
   font-weight: 700;
